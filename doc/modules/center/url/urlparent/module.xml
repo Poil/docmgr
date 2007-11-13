@@ -1,0 +1,13 @@
+	<module>
+		<module_name>URL Parents</module_name>
+		<link_name>urlparent</link_name>
+		<perm_error></perm_error>
+               	<permissions>INSERT_OBJECTS</permissions>
+		<custom_perm>OBJ_ADMIN</custom_perm>
+		<custom_perm>OBJ_MANAGE</custom_perm>
+		<auth_only>1</auth_only>
+		<sort_order>3</sort_order>
+		<module_description>Edit the owning collections of this object.</module_description>
+		<check_type>url</check_type>
+	</module>
+

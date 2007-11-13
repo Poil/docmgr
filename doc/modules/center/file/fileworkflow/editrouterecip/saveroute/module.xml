@@ -1,0 +1,10 @@
+	<module>
+		<module_name>Save Route</module_name>
+		<link_name>saveroute</link_name>
+		<hidden>1</hidden>
+		<perm_error>0</perm_error>
+		<auth_only>1</auth_only>
+		<module_description></module_description>
+		<template>empty</template>
+	</module>
+

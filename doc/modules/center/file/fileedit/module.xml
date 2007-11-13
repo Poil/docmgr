@@ -1,0 +1,17 @@
+	<module>
+		<module_name>Edit File</module_name>
+		<link_name>fileedit</link_name>
+    	<hidden>1</hidden>
+		<perm_error></perm_error>
+		<auth_only>1</auth_only>
+		<sort_order>4</sort_order>
+		<custom_perm>OBJ_ADMIN</custom_perm>
+		<custom_perm>OBJ_MANAGE</custom_perm>
+		<custom_perm>OBJ_EDIT</custom_perm>
+		<module_description></module_description>
+		<helper>file</helper>
+		<helper_sort>5</helper_sort>
+		<check_type>file</check_type>
+	</module>
+
+

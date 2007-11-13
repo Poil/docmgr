@@ -1,0 +1,22 @@
+
+#uploadFileText {
+	padding:10px;
+}
+
+#uploadFileText li {
+	list-style-type:none;
+	border-bottom:1px solid #DADADA;
+	margin-bottom:2px;
+}
+
+.textForm {
+	float:left;
+	margin-bottom:10px;
+	margin-right:40px;
+}
+
+.keywordForm {
+	float:left;
+	width:32%;
+	margin-bottom:10px;
+}

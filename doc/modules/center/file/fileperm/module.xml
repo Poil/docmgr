@@ -1,0 +1,13 @@
+	<module>
+		<module_name>Permissions</module_name>
+		<link_name>fileperm</link_name>
+		<hidden>0</hidden>
+		<perm_error></perm_error>
+		<auth_only>1</auth_only>
+		<sort_order>2</sort_order>
+		<module_description></module_description>
+		<custom_perm>OBJ_ADMIN</custom_perm>
+		<custom_perm>OBJ_MANAGE</custom_perm>
+		<check_type>file</check_type>
+	</module>
+

@@ -1,0 +1,12 @@
+	<module>
+		<module_name>Create New Collection</module_name>
+		<link_name>newcollection</link_name>
+		<hidden>1</hidden>
+		<permissions>ADMIN</permissions>
+		<permissions>INSERT_OBJECTS</permissions>
+		<template>blank</template>
+		<perm_error></perm_error>
+		<auth_only>1</auth_only>
+		<module_description></module_description>
+	</module>
+

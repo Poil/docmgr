@@ -1,0 +1,10 @@
+	<module>
+		<module_name>Browse</module_name>
+		<link_name>browse</link_name>
+		<hidden>0</hidden>
+		<perm_error></perm_error>
+		<auth_only>1</auth_only>
+		<sort_order>1</sort_order>
+		<module_description></module_description>
+	</module>
+

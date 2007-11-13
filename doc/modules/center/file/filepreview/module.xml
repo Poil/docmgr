@@ -1,0 +1,14 @@
+	<module>
+		<module_name>Preview File</module_name>
+		<link_name>filepreview</link_name>
+    		<hidden>1</hidden>
+		<auth_only>1</auth_only>
+		<sort_order>4</sort_order>
+		<module_description></module_description>
+		<helper>file</helper>
+		<helper_sort>1</helper_sort>
+		<helper_noperm>1</helper_noperm>
+		<check_type>file</check_type>
+	</module>
+
+

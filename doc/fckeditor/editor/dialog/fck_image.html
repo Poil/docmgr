@@ -1,0 +1,48 @@
+<html>
+
+<head>
+  <title>Insert Image</title>
+  <link rel="stylesheet" type="text/css" href="fck_image/stylesheet.css">
+  <script src="../../../jslib/ajax.js"></script>
+  <script src="../../../jslib/core.js"></script>
+  <script src="../../../jslib/dom.js"></script>
+  <script src="../../../jslib/string.js"></script>
+  <script src="fck_image/javascript.js"></script>
+  <script src="fck_image/tree.js"></script>
+  <script src="common/fck_dialog_common.js"></script>
+</head>
+
+<body onLoad="loadImagePage()">
+	<form name="pageForm" method="post" enctype="multipart/form-data" action="../../../app/fileupload.php" target="uploadframe">
+	<input type=hidden name="parentId" id="parentId" value="">
+	<input type=hidden name="sessionId" id="sessionId" value="">
+	
+	<!-- our hidden iframe for file uploads -->
+	<iframe name="uploadframe" id="uploadframe" width=1 height=1 style="visibility:hidden;position:absolute;left:0;top:0"></iframe>
+
+<div class="browseTree">
+
+	<div class="browseHeader">
+		<div id="selectMode">
+		</div>
+	</div>
+	<br>
+	<div id="pageTreeDiv" style="visibility:hidden;position:absolute">
+
+		<div id="pageTree"></div>
+
+	</div>
+	<div id="uploadFileDiv" style="visibility:hidden;position:absolute;"></div>
+
+	<div id="imagePropDiv"></div>
+	
+</div>
+<div class="browseList">
+	<div class="browseHeader" id="browseHeader"></div>
+	<div id="fileList"></div>
+</div>
+
+</div>
+</form>
+</body>
+</html>

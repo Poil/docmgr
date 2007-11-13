@@ -1,0 +1,9 @@
+	<module>
+		<module_name>Edit Route Recipients</module_name>
+		<link_name>editrouterecip</link_name>
+		<hidden>1</hidden>
+		<perm_error>0</perm_error>
+		<auth_only>1</auth_only>
+		<module_description></module_description>
+	</module>
+

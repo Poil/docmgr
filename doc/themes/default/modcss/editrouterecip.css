@@ -1,0 +1,195 @@
+
+#stagecol {
+	margin-right:10px;
+}
+
+.stage {
+	background-color:#e5ecf9;
+	width:100%;
+	min-height:100px;
+	margin-left:10px;
+	margin-right:10px;
+	margin-bottom:2px;
+	margin-top:2px;
+	border:1px solid #DADADA;
+	-moz-border-radius: 10px;
+}
+
+.stageTitle {
+	color:darkblue;
+	text-decoration:underline;
+	float:left;
+	font-weight:bold;
+	margin:5px;
+}
+
+.addLink {
+	float:right;
+	font-weight:bold;
+	margin:5px;
+}
+
+.addStage {
+	float:right;
+	font-weight:bold;
+	margin:5px;
+}
+
+.recipContainer {
+	height:80px;
+}
+
+.leftColumn {
+	width:70%;
+}
+
+.rightColumn {
+	width:24%;
+}
+
+.submitSmall {
+	width:120px;
+	margin:5px;
+}
+
+.recipList {
+	width:150px;
+	border:1px solid #DADADA;
+	height:100px;
+	overflow:auto;
+	list-style-type:none;
+}
+
+.recipList li {
+	border-bottom:1px solid #DADADA;
+}
+
+textarea {
+	border:1px solid #DADADA;
+}
+
+input {
+	border:1px solid #DADADA;
+}
+
+select {
+	border:1px solid #DADADA;
+}
+
+submit {
+	border:1px solid #DADADA;
+}
+
+.inputForm {
+	margin:10px;
+	float:left;
+	min-width:155px;
+}
+
+.addForm {
+	width:350px;
+	height:375px;
+	border:2px solid darkblue;
+	-moz-border-radius:20px;
+	position:absolute;
+	top:125px;
+	left:225px;
+	background-color:white;	
+}
+
+.editForm {
+	width:350px;
+	height:250px;
+	border:2px solid darkblue;
+	-moz-border-radius:20px;
+	position:absolute;
+	top:125px;
+	left:225px;
+	background-color:white;	
+}
+
+.saveTemplate {
+	width:350px;
+	height:325px;
+	border:2px solid darkblue;
+	-moz-border-radius:20px;
+	position:absolute;
+	top:125px;
+	left:225px;
+	background-color:white;	
+}
+
+.noteEntry {
+	width:275px;
+	height:100px;
+}
+
+#recipDiv {
+	list-style-type:none;
+	border:1px solid #DADADA;
+	overflow:auto;
+	width:275px;
+	height:100px;
+}
+
+#recipDiv li {
+	border-bottom: 1px solid #DADADA;
+}
+
+.funcdiv {
+	margin:10px;
+	float:right;
+}
+
+.funcbtns {
+	margin-right:10px;
+}
+
+.entryDiv {
+	border:1px solid black;
+	-moz-border-radius:5px;
+	float:left;
+	margin:2px;
+	padding:7px;
+}
+
+.submitSmall {
+	border:1px solid black;
+}
+
+#ctrlDiv {
+	white-space:nowrap;
+	text-align:center;
+	margin:7px;
+}
+
+#ctrlDiv a {
+	font-weight:bold;
+	color:blue;
+}
+
+.saveForm {
+	margin:10px;
+}
+
+.saveList {
+	margin:10px;
+}
+
+.templateList {
+	border:1px solid #DADADA;
+	height:250px;
+	width:300px;
+	overflow:auto;
+	list-style-type:none;
+}
+
+.templateList li {
+	border-bottom:1px solid #DADADA;
+}
+
+.closeList {
+	margin-left:15px;
+	padding-right:27px;
+	float:right;
+}

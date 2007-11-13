@@ -1,0 +1,24 @@
+
+.forumResultsEven {
+	font-size:12;
+	border: 1px solid white;
+	padding:5px;
+	background-color:#F7F7F7;
+}
+
+.forumResultsOdd {
+	font-size:12;
+	border: 1px solid white;
+	background-color:#D5E6E1;
+	padding:5px;
+}
+
+.forumResultsTitle {
+	font-size:12;
+	padding:5px;
+	font-weight:bold;
+	background-color:#D5E6E1;
+	color:#000080;
+	border: 1px solid white;
+}
+

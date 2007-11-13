@@ -1,0 +1,235 @@
+#!/usr/local/bin/php
+
+<?
+/**************************************************************************
+	docmgr-autoimport
+
+ 	This file imports documents in a specified
+        directory.  It will delete the documents in that
+	directory when the import is finished.  
+	This is intended to be run as a cron job
+**************************************************************************/
+
+
+//path to your docmgr installation
+$dirPath = "/www/doc";			//path of your docmgr installation
+$importPath = "/import";		//path of the directory you're monitoring
+$colId = "1719";				//id of the collection you want everything to end up in
+$userId = "1";				//id of the user which will own these files
+$removeFiles = null;			//set to 1 to remove files after import.  Set to 0 or null to prevent this
+
+
+/*****************************************
+	don't alter anything below here
+*****************************************/
+
+define("USER_ID",$userId);
+define("ALT_FILE_PATH",$dirPath);
+
+//our config
+include($dirPath."/config/config.php");
+include($dirPath."/config/app-config.php");
+
+//our libs
+include($dirPath."/header/callheader.php");
+include($dirPath."/lang/English.php");	//for translated error messages
+
+//set our path defines
+$filePath = getFilePath(FILE_DIR,$dirPath);
+
+define("DATA_DIR",$filePath."/data");
+define("TMP_DIR",$filePath."/tmp");
+define("THUMB_DIR",$filePath."/thumbnails");
+define("PREVIEW_DIR",$filePath."/preview");
+
+//call the rest of our defines
+include($dirPath."/app/common.inc.php");
+include($dirPath."/app/object.inc.php");
+include($dirPath."/app/index_function.inc.php");
+include($dirPath."/app/thumb_function.inc.php");
+
+$siteModArr = loadSiteStructure($dirPath."/modules/center/");
+$_SESSION["siteModList"] = $siteModArr["list"];
+$_SESSION["siteModInfo"] = $siteModArr["info"];
+
+//configure DocMGR to use avail external apps
+setExternalApps();
+loadObjects();
+
+
+$arr = list_dir($importPath);
+
+if (count($arr) > 0) {
+
+
+	`echo "Files found, beginning import" | logger`;
+	echo "Files found, beginning import\n";
+
+	//connect to the database
+	$conn = db_connect(DBHOST,DBUSER,DBPASSWORD,DBPORT,DBNAME);
+
+	//make sure our destination collection exists and is a collection
+	$sql = "SELECT id FROM dm_object WHERE id='$colId' AND object_type='collection'";
+	$info = single_result($conn,$sql);
+	if (!$info) {
+		echo "Collection specified in config does not exist or is not a collection";
+		`echo "Collection specified in config does not exist or is not a collection" | logger`;
+		die;
+	}	
+
+	//create our array to pass to the input function
+	$option = null;
+	$option["conn"] = $conn;
+	$option["filePath"] = $arr;
+	$option["parentId"] = $colId;
+	$option["removeFiles"] = $removeFiles;
+
+	//import our files
+	importObjects($option);
+
+	if (defined("IMPORT_ERROR_MESSAGE")) {
+		$msg = IMPORT_ERROR_MESSAGE;
+		`echo "$msg" | logger`;
+		echo $msg."\n";
+	}
+		
+	//vacuum the db because we just added a bunch of files	
+	db_vacuum($conn);
+
+}
+
+
+/************************************************************************
+	Process the recursive directory import
+************************************************************************/
+
+function importObjects($option) {
+
+	//get all our variables
+	extract($option);
+
+	//gives us filePath,conn,parentId
+	if (!is_array($filePath)) return false;
+	
+	//set the max execution time based on the number of files, right now 60 secs per file.  
+	$timeout = EXECUTION_TIME * $fileCount;
+	ini_set("max_execution_time","$timeout");	//putting this here is an experiment
+
+	foreach ($filePath AS $file) {
+
+		$colId = $parentId;
+		$file = stripsan($file);
+
+		//if we are importing a directory, create it in the system, then import
+		//its files by recalling this function
+		if (is_dir($file)) {
+
+			$arr = explode("/",$file);
+			$name = addslashes(array_pop($arr));
+			
+			$o = null;
+			$o["conn"] = $conn;
+			$o["name"] = $name;
+			$o["parentId"] = $colId;
+			$o["objectType"] = "collection";
+			$o["objectOwner"] = USER_ID;
+			$colId = createObject($o);
+
+			if (!$colId) continue;
+
+			//get the files in this directory
+			$files = listDirectory($file,null,null);
+
+			//import the files in this directory			
+			if (count($files) > 0) {
+
+				//add the path to the files.  We reassemble our original file path array
+				//with the new file at the end
+				for ($row=0;$row<count($files);$row++) 
+					$files[$row] = $file."/".$files[$row];
+
+				$opt = null;
+				$opt["conn"] = $conn;
+				$opt["filePath"] = $files;
+				$opt["parentId"] = $colId;
+				importObjects($opt);
+
+			}
+			
+			//delete the dir if requested by the user
+			if ($removeFiles) dirdel($file);
+
+		} else {
+
+			//extract the name from the file
+			$arr = explode("/",$file);
+			$name = sanitizeString(array_pop($arr));
+
+			//set all our options into the array with corresponding keys.  These will
+			//be passed to the file_insert function, which handles inserting the file into the system
+			$opt = null;
+			$opt["conn"] = $conn;
+			$opt["filepath"] = $file;
+			$opt["name"] = $name;
+			$opt["objectType"] = "file";
+			$opt["delete_files"] = "no";
+			$opt["parentId"] = $parentId;
+			$opt["objectOwner"] = USER_ID;
+			if (!$objId = createObject($opt)) continue;
+
+			//delete the file if requested by the user
+			if ($removeFiles) @unlink($file);
+
+		}
+
+
+        }
+
+        return true;
+			
+}
+
+
+function list_dir($dirname)
+{
+	static $result_array=array();
+	$handle=opendir($dirname);
+	while ($file = readdir($handle))
+	{
+		if($file=='.'||$file=='..' || strstr($file,"~"))	{
+			continue;
+		}
+		else	{
+			$result_array[]=$dirname."/".$file;
+		}
+	}
+	closedir($handle);
+	return $result_array;
+
+}
+function dir_array($dirname) {
+
+	static $dir_array=array();
+	$handle=opendir($dirname);
+	while ($file = readdir($handle))
+	{
+		if($file=='.'||$file=='..')	{
+			continue;
+		}
+		else	{
+			if (!stristr($file,"~")) {
+				if (is_dir($dirname."/".$file)) $dir_array[]=$dirname."/".$file;
+			}
+		}
+	}
+	closedir($handle);
+	return $dir_array;
+
+}
+
+
+
+
+
+
+

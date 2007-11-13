@@ -1,0 +1,8 @@
+	<module>
+		<module_name>Anonymous Access</module_name>
+		<link_name>anonaccess</link_name>
+		<hidden>1</hidden>
+		<skip_auth>1</skip_auth>
+		<module_description></module_description>
+	</module>
+

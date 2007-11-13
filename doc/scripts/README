@@ -1,0 +1,40 @@
+/**********************************************************
+	Description of the files in this directory
+**********************************************************/
+
+README				This file.
+
+checksum.php		Recreates the checksums for all files.  It also resets the version
+			in the dm_object table to the most recent version of a file.  This fixes
+			corrupt version information from a revision deletion bug.
+
+create-cache.php	Creates module.xml cache files for quicker site
+			loading.  This should only be required for high traffic sites.
+
+createthumbs.php	Recreates thumbnails for all supported file types in the system.
+
+docmgr-autoimport	This file imports documents in a specified
+			directory.  It will delete the documents in that directory when the import
+			is finished.  This is intended to be run as a cron job
+
+docmgr-tsearch2-pre802.sql	This sql script makes DocMGR databases
+				running on 7.4 through 8.0.2 versions of postgresql tsearch2 ready
+
+docmgr-tsearch2.sql		This sql scripts  DocMGR databases using
+				8.0.3 and later versions of postgresql tsearch2 ready.
+
+docmgr.pgsql			The docmgr database creation sql script.
+
+regprocedure_update.sql 	This file updates a tsearch2 enabled docmgr to allow
+				easier backups.  Should only be required for 7.4.x
+				versions of postgresql.
+
+reindex.php		Reindexes all documents.
+
+upgrade.php		Upgrades docmgr database from 0.5x to 0.54
+
+upgrade50/upgrade.php	This file upgrades 0.44-0.49.x to 0.50.  This must
+			be run before running the 0.51 migration script if you are running
+			0.44-0.49.x.  Run it from within the upgrade50/
+			directory.
+

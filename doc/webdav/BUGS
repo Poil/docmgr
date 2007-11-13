@@ -1,0 +1,26 @@
+One or two things do not work with Webdav.  These include:
+
+It is recommended that either Netdrive or Konqueror is used as a client
+for webdav.  These clients produce the most consistent results with
+the DocMGR webdav server.
+
+Checking files in and out (locking)
+
+Copying a folder into a directory that already contains a folder of the same
+name.
+
+I can't seem to open a folder that has "()" in the name
+
+Gnome VFS 2.10
+	If you copy over a file that already exists, the file is not updated
+	as a new revision.  Gnome VFS deletes files it believes its
+	overwriting before uploading the new file.  This is contrary
+	to common behavior of other clients, which usually allows the
+	server to handle such an event.
+
+	For some reason, it can't handle files with a "'" in the name,
+	like "John's Files".  I'm researching this, and hope to have
+	it fixed soon.
+
+
+	

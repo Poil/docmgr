@@ -1,0 +1,3 @@
+<?
+echo $siteContent;
+die;

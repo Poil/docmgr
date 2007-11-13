@@ -1,0 +1,20 @@
+	<module>
+		<module_name>Edit Document</module_name>
+		<link_name>docedit</link_name>
+    		<hidden>1</hidden>
+		<perm_error></perm_error>
+		<auth_only>1</auth_only>
+		<sort_order>4</sort_order>
+		<custom_perm>OBJ_ADMIN</custom_perm>
+		<custom_perm>OBJ_VIEW</custom_perm>
+		<custom_perm>OBJ_MANAGE</custom_perm>
+		<custom_perm>OBJ_EDIT</custom_perm>
+		<module_description></module_description>
+		<template>blank</template>
+		<helper>document</helper>
+		<helper_sort>2</helper_sort>
+		<helper_noperm>1</helper_noperm>
+		<check_type>document</check_type>
+	</module>
+
+

@@ -1,0 +1,4 @@
+<?
+
+$toolBar = modTreeMenu($module);
+

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<data>
+	<alert>
+		<name>Object waiting for you to view</name>
+		<link_name>OBJ_VIEW_ALERT</link_name>
+	</alert>
+
+	<alert>
+		<name>Object waiting for you to edit</name>
+		<link_name>OBJ_EDIT_ALERT</link_name>
+	</alert>
+
+	<alert>
+		<name>Object waiting for comment</name>
+		<link_name>OBJ_COMMENT_ALERT</link_name>
+	</alert>
+
+	<alert>
+		<name>Object awaiting approval</name>
+		<link_name>OBJ_APPROVAL_ALERT</link_name>
+	</alert>
+
+	<alert>
+		<name>Object Checked Out</name>
+		<link_name>OBJ_CHECKOUT_ALERT</link_name>
+		<type>subscription</type>
+	</alert>
+
+	<alert>
+		<name>Object Checked In</name>
+		<link_name>OBJ_CHECKIN_ALERT</link_name>
+		<type>subscription</type>
+	</alert>
+
+	<alert>
+		<name>Object Removed</name>
+		<link_name>OBJ_REMOVE_ALERT</link_name>
+		<type>colsubscription</type>
+	</alert>
+
+	<alert>
+		<name>New Object Created</name>
+		<link_name>OBJ_CREATE_ALERT</link_name>
+		<type>colsubscription</type>
+	</alert>
+
+	<alert>
+		<name>Comment Posted for object</name>
+		<link_name>OBJ_COMMENT_POST_ALERT</link_name>
+		<type>subscription</type>
+	</alert>
+
+	<alert>
+		<name>Pending task for object</name>
+		<link_name>OBJ_TASK_ALERT</link_name>
+	</alert>
+
+
+</data>
+

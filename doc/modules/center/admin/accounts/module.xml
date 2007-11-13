@@ -1,0 +1,13 @@
+	<module>
+		<module_name>Account Manager</module_name>
+		<link_name>accounts</link_name>
+		<hidden>0</hidden>
+		<permissions>ADMIN</permissions>
+		<permissions>MANAGE_USERS</permissions>
+		<permissions>EDIT_PROFILE</permissions>
+		<permissions>EDIT_PASSWORD</permissions>
+		<auth_only>1</auth_only>
+		<sort_order>1</sort_order>
+		<module_description>Use this tool to edit existing user accounts, or to create new ones.</module_description>
+	</module>
+
