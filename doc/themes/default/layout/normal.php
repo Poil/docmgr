@@ -9,6 +9,7 @@
 ?>
 <html>
 <head>
+<LINK rel="SHORTCUT ICON" href="<? echo THEME_PATH."/docmgrlogo.ico"; ?>">
 <title>
 <?
 if ($siteTitle) echo $siteTitle;
