@@ -16,7 +16,7 @@
 
 //connection settings
 define("DBHOST","127.0.0.1");
-define("DBUSER","elawman");
+define("DBUSER","postgres");
 define("DBPASSWORD","secret");
 define("DBPORT","5432");
 define("DBNAME","docmgr");
