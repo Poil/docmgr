@@ -23,11 +23,86 @@ function setClass(myvar,classVal) {
         return myvar;
 }
 
+//get a className value for an object
+function getObjClass(myvar) {
+
+        if (document.all) return myvar.getAttribute("className");
+        else return myvar.getAttribute("class");
+
+}
+
 //set an onclick event for an object
 function setClick(myvar,click) {
 
         if (document.all) myvar.onclick = new Function(" " + click + " ");
         else myvar.setAttribute("onClick",click);
+
+        return myvar;
+
+}
+
+//set an onclick event for an object
+function setDblClick(myvar,click) {
+
+        if (document.all) myvar.ondblclick = new Function(" " + click + " ");
+        else myvar.setAttribute("onDblClick",click);
+
+        return myvar;
+
+}
+
+//set an onclick event for an object
+function setMouseDown(myvar,click) {
+
+        if (document.all) myvar.onmousedown = new Function(" " + click + " ");
+        else myvar.setAttribute("onMouseDown",click);
+
+        return myvar;
+
+}
+//set an onclick event for an object
+function setMouseUp(myvar,click) {
+
+        if (document.all) myvar.onmouseup = new Function(" " + click + " ");
+        else myvar.setAttribute("onMouseUp",click);
+
+        return myvar;
+
+}
+
+//set an onclick event for an object
+function setMouseOver(myvar,click) {
+
+        if (document.all) myvar.onmouseover = new Function(" " + click + " ");
+        else myvar.setAttribute("onMouseOver",click);
+
+        return myvar;
+
+}
+
+//set an onclick event for an object
+function setMouseOut(myvar,click) {
+
+        if (document.all) myvar.onmouseout = new Function(" " + click + " ");
+        else myvar.setAttribute("onMouseOut",click);
+
+        return myvar;
+
+}
+
+// IE ONLY
+function setMouseEnter(myvar,click) {
+
+        if (document.all) myvar.onmouseenter = new Function(" " + click + " ");
+
+        return myvar;
+
+}
+
+// IE ONLY
+function setMouseLeave(myvar,click) {
+
+        if (document.all) myvar.onmouseleave = new Function(" " + click + " ");
 
         return myvar;
 
@@ -58,19 +133,8 @@ function createForm(formType,formName,checked) {
 
 }
 
-function createBtn(formName,val,oc) {
-
-	var btn = createForm("button",formName);
-	btn.setAttribute("value",val);
-
-	if (oc) setClick(btn,oc);
-
-	return btn;
-
-}
-
 //create a new form
-function createSelect(formName,change) {
+function createSelect(formName,change,dataArr,curVal) {
 
 	var curform;
 
@@ -89,6 +153,19 @@ function createSelect(formName,change) {
 		curform.setAttribute("id",formName);
 		if (change) curform.setAttribute("onChange",change);
 	}
+
+	//add data and a curvalue
+	if (dataArr && dataArr.length > 0) {
+
+		for (var i=0;i<dataArr.length;i++) {
+
+			curform[i] = new Option(dataArr[i]["name"],dataArr[i]["value"]);
+
+		}
+	
+	}
+
+	if (curVal) curform.value = curVal;
 
 	return curform;
 
@@ -114,6 +191,25 @@ function setKeyUp(myvar,click) {
 
 }
 
+//set an onclick event for an object
+function setFocus(myvar,click) {
+
+        if (document.all) myvar.onfocus = new Function(" " + click + " ");
+        else myvar.setAttribute("onfocus",click);
+
+        return myvar;
+
+}
+
+//set an onclick event for an object
+function setBlur(myvar,click) {
+
+        if (document.all) myvar.onblur = new Function(" " + click + " ");
+        else myvar.setAttribute("onblur",click);
+
+        return myvar;
+
+}
 
 //shorthand for getElementbyId
 function ge(element) {
@@ -121,8 +217,22 @@ function ge(element) {
 }
 
 //shorthand for creating an element
-function ce(elementType) {
-	return document.createElement(elementType);
+function ce(elementType,elementClass,elementId,txt) {
+
+	var e = document.createElement(elementType);
+
+	//add optional parameters
+	if (elementId) e.setAttribute("id",elementId);
+	if (elementClass) setClass(e,elementClass);
+
+	//append extra text.  If passed an object, append with without the textnode wrapper
+	if (isData(txt)) {
+		if (typeof(txt)=="object") e.appendChild(txt);
+		else e.appendChild(ctnode(txt));
+	}
+
+	return e;
+
 }
 
 function createCleaner() {
@@ -150,6 +260,7 @@ function hideObject(obj) {
         document.getElementById(obj).style.position="absolute";
         document.getElementById(obj).style.visibility="hidden";
         document.getElementById(obj).style.zIndex="-10";
+				document.getElementById(obj).style.display="none";
 
 }
 
@@ -160,6 +271,7 @@ function showObject(obj,zIndex) {
 
         document.getElementById(obj).style.position="static";
         document.getElementById(obj).style.visibility="visible";
+				document.getElementById(obj).style.display="block";
         document.getElementById(obj).style.zIndex=zIndex;
 
 }
@@ -195,16 +307,260 @@ function Ya(r,attr) {
 }
 
 //returns the value of a radio form
-function getRadioValue(obj) {
+function getRadioValue(name,obj) {
 
         if (!obj) return "";
 
-        var len = obj.length;
+				var setval = "";
 
-        if (len == undefined && obj.checked) return obj.value;
-        for (i=0;i<len;i++)
-                if (obj[i].checked) return obj[i].value;
+				//loop through area, get form with right name and see if it's checked at all
+				var arr = obj.getElementsByTagName("input");
 
-        return "";
+				for (var i=0;i<arr.length;i++) {
+
+					if (arr[i].type=="radio" && arr[i].id==name && arr[i].checked==true) {
+						setval = arr[i].value;
+						break;
+					}
+
+				}
+
+				return setval;
+
+}
+
+function createTextbox(formName,curVal,formLen) {
+
+        //create the base form
+        curform = createForm("text",formName);
+
+        //set our attributes
+        if (curVal) curform.setAttribute("value",curVal); 
+        if (formLen) curform.setAttribute("size",formLen);
+
+        return curform;
+ 
+}
+
+function createRadio(formName,formVal,curVal) {
+
+        var checked;
+
+        if (curVal == formVal) checked = 1;
+        else checked = null;
+
+        curform = createForm("radio",formName,checked);
+        curform.setAttribute("value",formVal);
+
+        return curform;
+ 
+}
+
+function createRadioDiv(formName,formVal,curVal,txt,cn,oc) {
+
+        var checked;
+
+				var mydiv = ce("div");
+				if (cn) setClass(mydiv,cn);
+
+        curform = createRadio(formName,formVal,curVal);
+				if (oc) setClick(curform,oc);
+
+				mydiv.appendChild(curform);
+				if (txt) mydiv.appendChild(ctnode(txt));
+
+        return mydiv;
+ 
+}
+
+function createCheckbox(formName,formVal,curVal) {
+
+        var checked;
+
+        if (curVal && curVal == formVal) checked = 1;
+        else checked = null;
+
+        curform = createForm("checkbox",formName,checked);
+        curform.setAttribute("value",formVal);
+
+        return curform;
+
+}
+ 
+function createTextarea(formName,curVal,rows,cols) {
+
+        //just don't ask...
+        if (document.all) {
+                fStr = "<textarea name=\"" + formName + "\" id=\"" + formName + "\"></textarea>";
+                curform = document.createElement(fStr);
+        }
+        else {
+                var curform = document.createElement("textarea");
+                curform.setAttribute("name",formName);
+                curform.setAttribute("id",formName);  
+        }
+
+        if (rows) curform.setAttribute("rows",rows);
+        if (cols) curform.setAttribute("cols",cols);
+
+        if (curVal) curform.value = curVal;
+
+        return curform;
+
+}
+
+function createBtn(formName,val,oc) {
+
+        var btn = createForm("button",formName);
+        btn.setAttribute("value",val);
+
+        if (oc) setClick(btn,oc);
+
+        return btn;
+
+}
+
+function setZIndex(objName,zIndex) {
+
+        var obj = ge(objName);
+        obj.style.zIndex = zIndex;
+ 
+}
+
+//create a table
+function createTable(tableName,className,width,border,cellpadding,cellspacing) {
+
+	if (!border) border = "0";
+	if (!cellpadding) cellpadding = "0";
+	if (!cellspacing) cellspacing = "0";
+
+	//create the element
+	if (document.all) {
+		var str = "<table ";
+		if (tableName) str += "id=\"" + tableName + "\" ";
+		if (className) str += "class=\"" + className + "\" ";
+		str += "border=\"" + border + "\" cellpadding=\"" + cellpadding + "\" cellspacing=\"" + cellspacing + "\">";
+
+		var tbl = ce(str);
+
+	} else {
+
+		var tbl = ce("table",className,tableName);
+
+		//set our main attributes
+		tbl.setAttribute("border",border);
+		tbl.setAttribute("cellpadding",cellpadding);
+		tbl.setAttribute("cellspacing",cellspacing);
+
+	}
+
+	if (width) tbl.setAttribute("width",width);
+
+	return tbl;
+
+}
+
+function createTableCell(cellName,className,rowspan,colspan) {
+
+	if (document.all) {
+
+		var str = "<td ";
+		if (cellName) str += "id=\"" + cellName + "\" ";
+		if (className) str += "class=\"" + className + "\" ";
+		if (rowspan) str += "rowspan=\"" + rowspan + "\" ";
+		if (colspan) str += "colspan=\"" + colspan + "\" ";
+		str += ">";
+		var cell = ce(str);
+
+	} else {
+
+		var cell = ce("td");
+		if (cellName) cell.setAttribute("id",cellName);
+		if (className) setClass(cell,className);
+		if (rowspan) cell.setAttribute("rowspan",rowspan);
+		if (colspan) cell.setAttribute("colspan",colspan);
+
+	}
+
+	return cell;
+
+}
+
+//removes all child nodes within an element
+function clearElement(el) {
+
+		while (el.hasChildNodes()) {
+			el.removeChild(el.firstChild);
+		}
+
+}
+
+//replaces content of an element with passed data
+function setElement(e,data) {
+
+	//clear out the insides
+	clearElement(e);
+
+	//append extra text.  If passed an object, append with without the textnode wrapper
+	if (isData(data)) {
+		if (typeof(data)=="object") e.appendChild(data);
+		else e.appendChild(ctnode(data));
+	}
+
+}
+
+//css
+function loadStylesheet(csspath) {
+	var oLink = document.createElement("link");
+	oLink.href = csspath;
+	oLink.rel = "stylesheet";
+	oLink.type = "text/css";
+	document.getElementsByTagName("head")[0].appendChild(oLink);
+}
+
+//javascript
+function loadJavascript(jspath) {
+	
+	var e = document.createElement("script");
+	e.src = jspath;
+	e.type="text/javascript";
+	document.getElementsByTagName("head")[0].appendChild(e); 
+
+}
+
+function createDateSelect(name,title) {
+
+  var cell = ce("div","popupCell");
+  var head = ce("div","formHeader","",title);
+  var form = createTextbox(name);
+  form.setAttribute("size","10");
+
+  var btn = createBtn(name + "_btn","...");
+
+  if (!window.Calendar) {
+    alert("You must include the calendar javascript file");
+  }
+   
+  Calendar.setup({
+          inputField      :    form,
+          ifFormat        :   "%m/%d/%Y",
+          button          :    btn,
+          singleClick     :    true,           // double-click mode
+          step            :    1                // show all years in drop-down boxes (instead of every other year as default)
+      });
+
+
+  cell.appendChild(head);
+  cell.appendChild(form);
+  cell.appendChild(btn); 
+
+  return cell;
+
+}
+
+function cdata(elementType,txt) {
+
+	var xml = "<" + elementType + "><![CDATA[" + escape(txt) + "]]></" + elementType + ">";
+	return xml
 
 }
