@@ -17,6 +17,13 @@
 </object>
 
 <object>
+	<extension>rtf</extension>
+	<proper_name>Rich Text Document</proper_name>
+	<mime_type>text/plain</mime_type>
+	<custom_type>txt</custom_type>
+</object>
+
+<object>
 	<extension>ics</extension>
 	<proper_name>ICalendar File</proper_name>
 	<mime_type>text/calendar</mime_type>
