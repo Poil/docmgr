@@ -455,7 +455,7 @@ class DOCMGR
 		{
 
 			//if it's in the path we are browsing, or there is no browse path, check it out
-			if (strstr($path,$this->path) || !$this->path) 
+			if ( !$this->path || strstr($path,strval($this->path)))
 			{
 
 				//convert the path to ids and make sure we have access to all of them

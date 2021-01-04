@@ -150,7 +150,7 @@ class APIREQUEST
   {
 
 		//try to set the session if passed
-		if ($this->header["session_id"]) session_id($this->header["session_id"]);
+		if ($this->header["session_id"]) @session_id($this->header["session_id"]);
 
 		//start the session
 		session_start();

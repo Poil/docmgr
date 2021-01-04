@@ -802,7 +802,7 @@ class DOCMGR_UTIL_QUERY
 		for ($i=0;$i<$this->results["count"];$i++) 
 		{
 			$keys = @array_keys($discArr["object_id"],$this->results[$i]["id"]);
-			$num = count($keys);
+			if ($keys) $num = count($keys);
 			if ($num > 0) $this->results[$i]["discussion"] = count($keys);
 		}
 	
