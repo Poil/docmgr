@@ -178,7 +178,7 @@ class EMAIL_SEND extends EMAIL
 	    $data = $d->getContent();
 	
 	    //log that each one was sent
-	    logEvent(OBJ_EMAILED,$docId);
+	    logEvent('OBJ_EMAILED',$docId);
 	   
 	    //make sure it's not already attached
 	    if (!$this->checkAttached($attach,$dir."/".$info["name"])) continue;

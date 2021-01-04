@@ -46,7 +46,7 @@ class DOCMGR_DOCUMENT extends DOCMGR_AOBJECT
 		}
 	
 		//log the view
-		logEvent(OBJ_VIEWED,$this->objectId);
+		logEvent('OBJ_VIEWED',$this->objectId);
 
 		//if direct, output directly to the browser, otherwise return the content
 		if ($this->apidata["direct"]) 
@@ -505,7 +505,7 @@ class DOCMGR_DOCUMENT extends DOCMGR_AOBJECT
 		//run our query
 		if ($this->DB->query($sql)) 
 		{
-			logEvent(OBJ_VERSION_PROMOTE,$this->objectId);
+			logEvent('OBJ_VERSION_PROMOTE',$this->objectId);
 			return true;
 		}
 		else return false;

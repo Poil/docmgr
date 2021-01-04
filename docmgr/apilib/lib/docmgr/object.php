@@ -396,7 +396,7 @@ class DOCMGR_OBJECT extends DOCMGR_AOBJECT
 		$option["where"] = "id='".$this->objectId."'";
 		$this->DB->update("docmgr.dm_object",$option);
 
-		logEvent(OBJ_PROP_UPDATE,$this->objectId);
+		logEvent('OBJ_PROP_UPDATE',$this->objectId);
 
 		$this->DB->end();
 
@@ -722,7 +722,7 @@ class DOCMGR_OBJECT extends DOCMGR_AOBJECT
 			$this->DB->query($sql);
 
 			//log it
-			logEvent(OBJ_MOVED,$list[$i]["object_id"]);
+			logEvent('OBJ_MOVED',$list[$i]["object_id"]);
 
 		}
 
@@ -1272,7 +1272,7 @@ class DOCMGR_OBJECT extends DOCMGR_AOBJECT
 
 			DOCMGR_UTIL_OBJPERM::save($this->objectId,$opt);
 
-			logEvent(OBJ_PERM_UPDATE,$this->objectId);
+			logEvent('OBJ_PERM_UPDATE',$this->objectId);
 
 		}
 			

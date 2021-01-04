@@ -175,7 +175,7 @@ class DOCMGR_UTIL_LOCK
 		{
 
 			//log the checkout
-			logEvent(OBJ_LOCKED,$this->objectId);
+			logEvent('OBJ_LOCKED',$this->objectId);
 			                  
 			//send a subscription alert
 			$n = new NOTIFICATION_DOCMGR();
@@ -342,7 +342,7 @@ class DOCMGR_UTIL_LOCK
 		if ($this->DB->error()) 
 			$this->throwError($this->DB->error());
 		else 
-			logEvent(OBJ_UNLOCKED,$this->objectId);
+			logEvent('OBJ_UNLOCKED',$this->objectId);
 
 	}
 

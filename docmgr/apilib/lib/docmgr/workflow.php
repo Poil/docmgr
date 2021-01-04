@@ -677,7 +677,7 @@ class DOCMGR_WORKFLOW extends DOCMGR
 		{
 
 		    //log that it's finished
-	      foreach ($objarr["object_id"] AS $obj) logEvent(OBJ_WORKFLOW_END,$obj);
+	      foreach ($objarr["object_id"] AS $obj) logEvent('OBJ_WORKFLOW_END',$obj);
 
 		    //see if we are supposed to notify the user this is complete
 		    $this->notifyComplete();
@@ -693,7 +693,7 @@ class DOCMGR_WORKFLOW extends DOCMGR
 	  {
 
 	  	//starting a new one
-	  	if ($stage=="0") foreach ($objarr["object_id"] AS $obj) logEvent(OBJ_WORKFLOW_BEGIN,$obj);
+	  	if ($stage=="0") foreach ($objarr["object_id"] AS $obj) logEvent('OBJ_WORKFLOW_BEGIN',$obj);
 
 	  	$sql = "SELECT name FROM docmgr.dm_workflow WHERE id='$workflowId'";
 	  	$info = $this->DB->single($sql);
@@ -868,7 +868,7 @@ class DOCMGR_WORKFLOW extends DOCMGR
 
 		for ($i=0;$i<$objlist["count"];$i++)
 		{
-			logEvent(OBJ_WORKFLOW_CLEAR,$list[$i]["object_id"]);
+			logEvent('OBJ_WORKFLOW_CLEAR',$list[$i]["object_id"]);
 		}
 		
 		$this->DB->end();
@@ -993,7 +993,7 @@ class DOCMGR_WORKFLOW extends DOCMGR
   	$this->notifyComplete(1);
 
   	//log the rejection
-  	logEvent(OBJ_WORKFLOW_REJECT,$objectId);
+  	logEvent('OBJ_WORKFLOW_REJECT',$objectId);
 
   	$this->DB->end();
   	
@@ -1093,7 +1093,7 @@ class DOCMGR_WORKFLOW extends DOCMGR
 			$list = $this->DB->fetch($sql);
 	        
 			//log the clear for all affected objects    
-			for ($i=0;$i<$list["count"];$i++) logEvent(OBJ_WORKFLOW_CLEAR,$list[$i]["object_id"]);
+			for ($i=0;$i<$list["count"];$i++) logEvent('OBJ_WORKFLOW_CLEAR',$list[$i]["object_id"]);
 	                		
 			//delete the tasks
 			$sql = "DELETE FROM docmgr.dm_workflow_route WHERE workflow_id='".$this->workflowId."';";

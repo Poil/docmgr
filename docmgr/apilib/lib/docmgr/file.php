@@ -302,7 +302,7 @@ class DOCMGR_FILE extends DOCMGR_AOBJECT
 				return false;
 			}
 
-			logEvent(OBJ_VIRUS_PASS,$this->objectId);
+			logEvent('OBJ_VIRUS_PASS',$this->objectId);
 
 		}
 
@@ -418,7 +418,7 @@ class DOCMGR_FILE extends DOCMGR_AOBJECT
 		if (!fileChecksum($fileId,$filename)) 
 		{
 			$errorMessage = _I18N_INVALID_MD5CHECKSUM_ERROR;
-			logEvent(OBJ_CHECKSUM_VERIFY_FAIL,$this->objectId);
+			logEvent('OBJ_CHECKSUM_VERIFY_FAIL',$this->objectId);
 
 			$this->throwError($errorMessage);
 			return false;
@@ -426,7 +426,7 @@ class DOCMGR_FILE extends DOCMGR_AOBJECT
 		} 
 		else 
 		{
-			logEvent(OBJ_CHECKSUM_VERIFY_PASS,$this->objectId);	
+			logEvent('OBJ_CHECKSUM_VERIFY_PASS',$this->objectId);	
 		}
 
 
@@ -436,11 +436,11 @@ class DOCMGR_FILE extends DOCMGR_AOBJECT
 	       
 			$str = clamAvScan($filename);
 			
-			if ($str===FALSE) logEvent(OBJ_VIRUS_ERROR,$this->objectId);		//scanning error, continue
-			elseif ($str=="clean") logEvent(OBJ_VIRUS_PASS,$this->objectId);	//file clean, continue
+			if ($str===FALSE) logEvent('OBJ_VIRUS_ERROR',$this->objectId);		//scanning error, continue
+			elseif ($str=="clean") logEvent('OBJ_VIRUS_PASS',$this->objectId);	//file clean, continue
 			else 
 			{
-				logEvent(OBJ_VIRUS_FAIL,$this->objectId,$str);			//virus found, stop and alert
+				logEvent('OBJ_VIRUS_FAIL',$this->objectId,$str);			//virus found, stop and alert
 				$this->throwError($str);
 				return false;
 			}
@@ -533,7 +533,7 @@ class DOCMGR_FILE extends DOCMGR_AOBJECT
 		} 
 
 		//log the view
-		logEvent(OBJ_VIEWED,$this->objectId);
+		logEvent('OBJ_VIEWED',$this->objectId);
 
 		//if given something to return, pass it back, otherwise stop here
 		if ($retvalue) return $retvalue;
@@ -811,7 +811,7 @@ class DOCMGR_FILE extends DOCMGR_AOBJECT
 		//run our query
 		$this->DB->query($sql);
 	
-		logEvent(OBJ_VERSION_PROMOTE,$this->objectId);
+		logEvent('OBJ_VERSION_PROMOTE',$this->objectId);
 	
 	}
 
