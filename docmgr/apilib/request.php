@@ -11,12 +11,6 @@
 require_once("apilib/apirequest.php");
 
 //make sure magic quotes is disabled
-if (get_magic_quotes_gpc()==1)
-{
-	$PROTO->add("error","Magic quotes is enabled.  It must be disabled in your php.ini file");
-  return false;
-}
-
 //try to pull from apidata.  If nothing, default to request (for socket connections)
 if ($_REQUEST["apidata"]) $apidata = $_REQUEST["apidata"];
 

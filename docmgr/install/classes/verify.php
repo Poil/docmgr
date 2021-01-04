@@ -100,13 +100,6 @@ class VERIFY
       return false;
     }
 
-    //make sure magic quotes is not turned on
-    if (get_magic_quotes_gpc()==1)
-    {
-      $this->throwError("You must turn of magic quotes in your php.ini file");
-      return false;
-    }      
-
     if (!extension_loaded("pgsql"))
     {
       $this->throwError("You must enable the pgsql extension for PHP");
