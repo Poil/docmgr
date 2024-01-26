@@ -15,7 +15,7 @@
 
 <title>
 <?php
-if ($siteTitle) echo $siteTitle;
+if (isset($siteTitle)) echo $siteTitle;
 else echo $siteModInfo[$module]["module_name"]." - ".SITE_TITLE;
 ?>
 </title>
@@ -94,7 +94,7 @@ includeJavascript($js);
 $onPageLoad = "SIDEBAR.setSizes();NOTIFICATIONS.load();".$onPageLoad;
 
 //used by a module to directly inject something into the page header
-if ($siteHeadStr) echo $siteHeadStr;
+if (isset($siteHeadStr)) echo $siteHeadStr;
 
 ?>
 </head>

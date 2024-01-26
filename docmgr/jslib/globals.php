@@ -1,5 +1,12 @@
 <?php
 
+defined('USER_ID') or define('USER_ID', '');
+defined('USER_FN') or define('USER_FN', '');
+defined('USER_LN') or define('USER_LN', '');
+defined('USER_EMAIL') or define('USER_EMAIL', '');
+defined('USER_LOGIN') or define('USER_LOGIN', '');
+defined('BITSET') or define('BITSET', '');
+
 //transfer some PHP-side variables into javascript variables
 echo "
 <script type=\"text/javascript\">

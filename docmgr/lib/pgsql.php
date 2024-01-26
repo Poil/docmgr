@@ -95,7 +95,7 @@ CLASS POSTGRESQL
 			return false;
 		}
 	
-		$num = pg_numrows($result);
+		$num = pg_num_rows($result);
 
 		if ($num!=0) $arr = pg_fetch_all($result);
 
@@ -124,7 +124,7 @@ CLASS POSTGRESQL
 			return false;
 		}
 	
-		$num = pg_numrows($result);
+		$num = pg_num_rows($result);
 
 		if ($num != 0) 
 		{
@@ -168,7 +168,7 @@ CLASS POSTGRESQL
 			return false;
 		}
 	
-		return pg_numrows($result);
+		return pg_num_rows($result);
 	
 	}
 
@@ -272,7 +272,7 @@ CLASS POSTGRESQL
 		*/
 	function sanitize($str)
 	{
-		return pg_escape_string($str);
+		return pg_escape_string($GLOBALS["conn"], $str);
 	}
 	
 	/*************************************************

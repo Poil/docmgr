@@ -797,11 +797,11 @@ class DOCMGR_UTIL_QUERY
 		//merge the collection values in for these
 		$sql = "SELECT object_id FROM docmgr.dm_discussion WHERE object_id IN (".implode(",",$curArr).")";
 		$discArr = $this->DB->fetch($sql,1);
-	
+	        if ($discArr["count"])
 		//merge our collection values in
 		for ($i=0;$i<$this->results["count"];$i++) 
 		{
-			$keys = @array_keys($discArr["object_id"],$this->results[$i]["id"]);
+			$keys = array_keys($discArr["object_id"],$this->results[$i]["id"]);
 			if ($keys) $num = count($keys);
 			if ($num > 0) $this->results[$i]["discussion"] = count($keys);
 		}

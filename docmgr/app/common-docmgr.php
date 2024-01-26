@@ -141,7 +141,7 @@ function setExternalApps() {
 	//antivirus support
 	if ($_SESSION["api"]["setApps"]["clamav"]) define("CLAMAV_SUPPORT","1");
 
-	if ($_SESSION["api"]["setApps"]["email"]) define("EMAIL_SUPPORT","1");
+	if (!array_key_exists("email", $_SESSION["api"]["setApps"])) define("EMAIL_SUPPORT","1");
 
 	return true;
 	

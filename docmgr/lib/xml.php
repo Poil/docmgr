@@ -311,7 +311,7 @@ function simplexml2array($xml) {
 			$ret = simplexml2array($v);
 
 			//if we have an entry, append, otherwise start new array
-			if ($arr[$k]) $arr[$k][] = $ret;
+			if (array_key_exists($k, $arr)) $arr[$k][] = $ret;
 			else $arr[$k] = array($ret);
 			
 		} else {
