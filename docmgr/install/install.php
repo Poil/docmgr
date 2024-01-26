@@ -1,4 +1,6 @@
 <?php
+return false;
+
 //required files
 include("lib/pgsql.php");
 include("lib/logger.php");
