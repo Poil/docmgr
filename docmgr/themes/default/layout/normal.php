@@ -61,7 +61,7 @@ $js = null;
 $js .= "lang/en/client.js;";
 
 //load the appropriate client side language file
-if ($_SESSION["api"]["accountInfo"]["language"]) $lang = $_SESSION["api"]["accountInfo"]["language"];
+if (isset($_SESSION["api"]["accountInfo"]["language"])) $lang = $_SESSION["api"]["accountInfo"]["language"];
 else $lang = DEFAULT_LANGUAGE;
 
 //make sure the file exists, or throw an error
