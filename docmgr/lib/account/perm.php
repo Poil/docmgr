@@ -133,7 +133,7 @@ class PERM
     $arr = explode("/",$file);
     $sessName = array_pop($arr);
 
-    if (!$_SESSION[$sessName] || defined("DEV_MODE")) 
+    if (!isset($_SESSION[$sessName]) || defined("DEV_MODE")) 
     {
 
       if (defined("ALT_FILE_PATH")) $file = ALT_FILE_PATH."/".$file;
@@ -144,7 +144,7 @@ class PERM
 
     }
 
-    if ($_SESSION[$sessName]["perm"])
+    if (isset($_SESSION[$sessName]["perm"]))
     {
 
       foreach ($_SESSION[$sessName]["perm"] AS $perm)
