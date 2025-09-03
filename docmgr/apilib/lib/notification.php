@@ -12,6 +12,8 @@ class NOTIFICATION
   protected $DB;
   protected $PROTO;
   protected $LOGGER;
+
+  public $CDB;
         
   //this thing takes an id or an array, so an object id can be passed to init the object  
   function __construct($initdata=null) 

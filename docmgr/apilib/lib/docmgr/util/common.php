@@ -89,7 +89,7 @@ class DOCMGR_UTIL_COMMON
 
 		$ret = null;
 
-		if ($_SESSION["api"]["parentIds"])
+		if (isset($_SESSION["api"]["parentIds"]))
 		{
 
 			$pids = $_SESSION["api"]["parentIds"];
