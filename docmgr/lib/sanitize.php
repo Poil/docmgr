@@ -35,7 +35,8 @@ function sanitize($obj,$es=null) {
 *********************************************************/
 function sanitizeString($str) {
 
-    return pg_escape_string(trim(strip_tags($str)));
+    # return pg_escape_string(trim(strip_tags($str)));
+    return addslashes(trim(strip_tags($str)));
 
 }
 /*********************************************************

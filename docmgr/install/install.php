@@ -1,4 +1,5 @@
 <?php
+return false;
 
 //required files
 include("lib/pgsql.php");

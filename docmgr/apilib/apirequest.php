@@ -108,7 +108,7 @@ class APIREQUEST
 		if (!is_array($this->apidata))
 		{
 		
-		  $pos = stripos($apidata,"<data>");
+		  $pos = @stripos($apidata,"<data>");
   
 		  if ($pos!==FALSE && $pos=="0")
 		  {
@@ -164,10 +164,10 @@ class APIREQUEST
                                 
 			//now go through authentication.  the AUTH class will just return
 			//true if we are already using a valid session
-			$a = new AUTH($this->header["login"],$this->header["password"]);
+			$a = new AUTH(@$this->header["login"],@$this->header["password"]);
 
 			//if passed a save_cookie parameter, set class to write a cookie on auth
-			if ($this->header["save_cookie"]) $a->writeCookie = 1;
+			if (array_key_exists("save_cookie", $this->header)) $a->writeCookie = 1;
 
 			$ret = $a->authorize();
 

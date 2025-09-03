@@ -45,14 +45,14 @@ class DOCMGR_OBJECT extends DOCMGR_AOBJECT
 
 			$this->update($this->apidata);
 
-			$event = OBJ_UPDATED;
+			$event = "OBJ_UPDATED";
 			
 		}
 		else 
 		{
 
 			$this->create($this->apidata);
-			$event = OBJ_CREATED;
+			$event = "OBJ_CREATED";
 			
 		}
 

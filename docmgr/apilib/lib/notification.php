@@ -20,7 +20,7 @@ class NOTIFICATION
     //db resources
     $this->conn = $GLOBALS["conn"];  
     $this->DB = $GLOBALS["DB"];
-    $this->CDB = $GLOBALS["CDB"];
+    $this->CDB = array_key_exists("CDB", $GLOBALS) ? $GLOBALS["CDB"] : "";
     $this->PROTO = $GLOBALS["PROTO"];
     $this->LOGGER = $GLOBALS["logger"];
 

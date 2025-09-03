@@ -378,17 +378,17 @@ function checkObjName($name,$parentId,$objectId = null) {
   {
     //get the name of the parents for the error message
     if (!$parentId[0])
-      $parentName = _HOME;
+      $parentName = "_HOME";
     else 
     {
       
       $sql = "SELECT name FROM docmgr.dm_object WHERE id IN (".implode(",",$parentId).")";
       $info = $DB->fetch($sql,1);
-      $parentName = implode("\" "._OR." \"",$info["name"]);
+      $parentName = implode("\" "."_OR"." \"",$info["name"]);
 
     }
     
-    $msg = _OBJ_WITH_NAME." \"".$name."\" "._ALREADY_EXISTS_IN." \"".$parentName."\"";
+    $msg = "_OBJ_WITH_NAME"." \"".$name."\" "."_ALREADY_EXISTS_IN"." \"".$parentName."\"";
     define("ERROR_MESSAGE",$msg);
     define("ERROR_CODE","OBJECT_EXISTS");
 
