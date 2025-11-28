@@ -5,4 +5,4 @@ A PHP/Postgresql based document management system (DMS) with full-text searching
 
 ## Fork information
 
-This is a fork from https://sourceforge.net/projects/docmgr/ to avoid problem with PHP 7.4 (and Postgresql 12.5)
+This is a fork from https://sourceforge.net/projects/docmgr/ to avoid problem with PHP 8.3 (and Postgresql 16)

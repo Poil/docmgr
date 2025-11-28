@@ -14,7 +14,7 @@ class DOCMGR_BOOKMARK extends DOCMGR
   	$check = true;
 
 		//if passed a bookmark, make sure we own it or are an admin
-		if ($this->apidata["bookmark_id"] && !PERM::check(ADMIN))
+		if (isset($this->apidata["bookmark_id"]) && !PERM::check(ADMIN))
 		{
 
 			$sql = "SELECT account_id FROM docmgr.dm_bookmark WHERE id='".$this->apidata["bookmark_id"]."'";
@@ -30,7 +30,7 @@ class DOCMGR_BOOKMARK extends DOCMGR
 
 		//passed an account id that's not ours and non-admin
 		if (	$check==true && 
-					$this->apidata["account_id"] && 
+					isset($this->apidata["account_id"]) && 
 					$this->apidata["account_id"]!=USER_ID && 
 					!PERM::check(ADMIN)
 					)
@@ -54,7 +54,7 @@ class DOCMGR_BOOKMARK extends DOCMGR
 		if (!$this->checkPermissions()) return false;
 
 		//allow admins to edit other user's bookmarks
-		if ($this->apidata["account_id"]) $aid = $this->apidata["account_id"];
+		if (isset($this->apidata["account_id"])) $aid = $this->apidata["account_id"];
 		else $aid = USER_ID;
 
 		//get the children of the bookmark

@@ -87,7 +87,7 @@ class DOCMGR_QUERY extends DOCMGR_AOBJECT
           $data[$i]["extension"] =  $type = return_file_extension($data[$i]["name"]);
 
           //if asked, return image size also
-          if ($this->apidata["show_image_size"] && $data[$i]["type"]=="image")
+          if (isset($this->apidata["show_image_size"]) && $data[$i]["type"]=="image")
           {
           	$arr = $this->getImageSize($data[$i]["id"]);
           	$data[$i]["image_width"] = $arr["width"];
@@ -103,8 +103,8 @@ class DOCMGR_QUERY extends DOCMGR_AOBJECT
     //get default view for this collection
 		$o = new DOCMGR_OBJECT($parent);
 		$view = $o->getView();
-		$this->PROTO->add("default_view",$view["default_view"]);
-		$this->PROTO->add("account_view",$view["account_view"]);
+		$this->PROTO->add("default_view",$view["default_view"] ?? null);
+		$this->PROTO->add("account_view",$view["account_view"] ?? null);
 
 		//store the object we are browsing in a session to be used by other api calls
 		$_SESSION["api"]["current_object_id"] = $this->objectId;

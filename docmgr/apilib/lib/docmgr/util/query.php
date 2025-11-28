@@ -12,6 +12,8 @@ class DOCMGR_UTIL_QUERY
 	private $sortDirection;
 	private $sqlRank;
 
+	public $sortName;
+
 	function __construct()
 	{
 		$this->DB = $GLOBALS["DB"];
@@ -228,15 +230,18 @@ class DOCMGR_UTIL_QUERY
 	
 		$this->sortField = "name";
 		$this->sortName = "ascending";
+		$sort_field = null;
+		$sort_dir = null;
+		$filter = null;
 	
 		//optional params
-		if ($data["sort_field"]) 					$this->sortField = $data["sort_field"];
-		if ($data["sort_dir"]) 						$this->sortDirection = $data["sort_dir"];
-		if ($data["search_limit"]!=null) 	$this->searchLimit = $data["search_limit"];
+		if ($data["sort_field"]) $this->sortField = $data["sort_field"];
+		if ($data["sort_dir"]) $this->sortDirection = $data["sort_dir"];
+		if ($data["search_limit"]!=null) $this->searchLimit = $data["search_limit"];
 		if ($data["search_offset"]!=null) $this->searchOffset = $data["search_offset"];
 	
 		//dont use values stored in session
-		if ($data["use_last"]) $reset = null;
+		if (isset($data["use_last"])) $reset = null;
 		else $reset = 1;
 		
 		//setup the sort field

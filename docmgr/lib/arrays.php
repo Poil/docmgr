@@ -190,7 +190,7 @@ function arrayMultiSort($modArray,$sort,$dir="ASC") {
 
 		//loop through the array and pad the empty values.  We can't use array_pad because
 		//we will lose our key order
-		for ($row=0;$row<$realSize;$row++) if (!$arr[$row]) $arr[$row] = $pad;
+		for ($row=0;$row<$realSize;$row++) if (!isset($arr[$row]) || !$arr[$row]) $arr[$row] = $pad;
 
 	}
 

@@ -61,19 +61,19 @@ class AUTH
 	{
 
 		//if we don't have an authorized session, authorize us by either cookie or login/password
-		if (!$_SESSION["api"]["authorize"])
+		if (!isset($_SESSION["api"]["authorize"]))
 		{
 		
 			//try the cookie first
 			if (defined("USE_COOKIES")) $this->authorize_cookie();		
 		
 			//if the cookie didn't work
-			if (!$_SESSION["api"]["authorize"]) $this->authorize_password();
+			if (!isset($_SESSION["api"]["authorize"])) $this->authorize_password();
 
 		}
 
 		//so far so good, setup our info to be used by the api
-		if ($_SESSION["api"]["authorize"])
+		if (isset($_SESSION["api"]["authorize"]))
 		{
 
 			//store their login info and settings in a session
@@ -170,7 +170,7 @@ class AUTH
 	{
 
 		//no cookie saved to work with
-		if (!$_COOKIE["authentication"]) return false;
+		if (!isset($_COOKIE["authentication"])) return false;
 
 		//get our cookie info	
 		$info = explode(":",$_COOKIE["authentication"]);

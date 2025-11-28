@@ -387,12 +387,12 @@ class DOCMGR_FILE extends DOCMGR_AOBJECT
 			return false;
 		}
 
-		$lock = $this->apidata["lock"];
+		$lock = $this->apidata["lock"] ?? null;
 		$realname = $this->objectInfo["name"];
 		$version = $this->objectInfo["version"];
 
 		//a revision was specified, view that one instead
-		if ($this->apidata["file_id"])
+		if (isset($this->apidata["file_id"]))
 		{
 
 			$fileId = $this->apidata["file_id"];
@@ -448,7 +448,7 @@ class DOCMGR_FILE extends DOCMGR_AOBJECT
 		}	                                                
 
 		//return the content as a string
-		if ($this->apidata["contentonly"] || $mode=="contentonly")
+		if (isset($this->apidata["contentonly"]) || $mode=="contentonly")
 		{
 
 			$c = file_get_contents($filename);		
@@ -457,7 +457,7 @@ class DOCMGR_FILE extends DOCMGR_AOBJECT
 			$retvalue = $c;
 		
 		} 
-		else if ($this->apidata["stream"] || $mode=="stream")
+		else if (isset($this->apidata["stream"]) || $mode=="stream")
 		{
 
 			$stream = fopen($filename,"r");

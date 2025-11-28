@@ -422,7 +422,11 @@ class DOCMGR_UTIL_OBJPERM
 		{
 
 			$idArr = array();
-			foreach ($data AS $curObj) if ($curObj["id"]) $idArr[] = $curObj["id"];
+			foreach ($data AS $curObj) {
+				if (is_array($curObj) && isset($curObj["id"])) {
+					$idArr[] = $curObj["id"];
+				}
+			}
 
 			//query all the passed objects at once so we only have to hit the DB once.  the extra share subquery will
 			//make sure only root shared objects (not objects in a shared collection) will show as "shared"

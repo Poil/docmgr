@@ -226,7 +226,7 @@ function return_modlist($str) {
 			if ($field == "count") continue;	
 
 			//check to make sure we do not have show_module and hide_module in this entry
-			if (is_array($list["show_module"][$i]) && is_array($list["hide_module"][$i]))
+			if (isset($list["show_module"][$i]) && is_array($list["show_module"][$i]) && isset($list["hide_module"][$i]) && is_array($list["hide_module"][$i]))
 				die("Cannot set \"show_module\" and \"hide_module\" simultaneously in \"".$key."\" module.xml");
 
 			//these have multiple values, handle that

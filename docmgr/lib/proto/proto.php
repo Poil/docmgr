@@ -63,7 +63,7 @@ class PROTO
       $val = $this->fixQueryArray($val);
       
       //if no entry, make an new array for this key    
-      if ($this->data[$key] && !$rep) 
+      if (isset($this->data[$key]) && !$rep) 
       {
         
         //if associated, add as a new object.  otherwise just merge into the array
@@ -86,7 +86,7 @@ class PROTO
 
       //if it already exists, convert into an array with the original value
       //then add the new value
-      if ($this->data[$key] && !$rep)
+      if (isset($this->data[$key]) && !$rep)
       {
 
         //not already an array, convert
@@ -239,7 +239,7 @@ class PROTO
   protected function fixQueryArray(&$arr)
   {
   
-    if ($arr[0] && $arr["count"]) unset($arr["count"]);
+    if (isset($arr[0]) && isset($arr["count"])) unset($arr["count"]);
     
     $keys = array_keys($arr);
 
@@ -283,7 +283,7 @@ class PROTO
     {
     
       //remove non-utf8
-       if (!is_resource($val)) $val = iconv("UTF-8","UTF-8//IGNORE",$val);
+       if (!is_resource($val)) $val = iconv("UTF-8","UTF-8//IGNORE", $val ?? '');
 
     }
 

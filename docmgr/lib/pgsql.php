@@ -86,6 +86,7 @@ CLASS POSTGRESQL
 		RETURNS:	array
 	****************************************************************/
 	function fetch($sql,$transpose=null) {
+		$arr = [];
 
 		if (!$sql) return false;
 
@@ -100,7 +101,7 @@ CLASS POSTGRESQL
 		if ($num!=0) $arr = pg_fetch_all($result);
 
 		//flip results if asked
-		if ($transpose) $arr = transposeArray($arr);
+		if (isset($transpose)) $arr = transposeArray($arr);
 
 		$arr["count"] = $num;
 		return $arr;
@@ -377,9 +378,9 @@ CLASS POSTGRESQL
 			$valueString = implode(",",$valueArr);
 		
 			$sql = "INSERT INTO $table (".$fieldString.") VALUES (".$valueString.");";
-			if ($option["debug"]) dprint($sql."\n");
-			if ($option["query"]) return $sql;
-			if ($option["_showquery"]) file_put_contents("/tmp/query.sql",$sql);
+			if (isset($option["debug"]) && $option["debug"]) dprint($sql."\n");
+			if (isset($option["query"]) && $option["query"]) return $sql;
+			if (isset($option["_showquery"]) && $option["_showquery"]) file_put_contents("/tmp/query.sql",$sql);
 			
 			if ($result = $this->query($sql,$nolog)) {
 	

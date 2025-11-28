@@ -90,14 +90,14 @@ class DOCMGR
 	      else 
 	      {
 
-	        if ($this->apidata["object_id"]!=null) 
+	        if (array_key_exists("object_id", $this->apidata) && $this->apidata["object_id"] != null)
 	        {
 	
 	        	$this->objectId = $this->apidata["object_id"];
 	          $this->setObjectInfo();
 	
 	        } 
-	        else if ($this->apidata["path"]) 
+	        else if (isset($this->apidata["path"]))
 	        {
 	
 	          $this->path = $this->apidata["path"];
@@ -760,7 +760,12 @@ class DOCMGR
 
 		$this->PROTO->add("current_object_id",$this->objectId);
 		$this->PROTO->add("current_object_path",$this->path);
-		$this->PROTO->add("current_object_name",$this->objectInfo["name"]);
+		if (is_array($this->objectInfo) && isset($this->objectInfo["name"])) {
+			$this->PROTO->add("current_object_name",$this->objectInfo["name"]);
+		} else {
+			$this->PROTO->add("current_object_name", null);
+		}
+
 		$this->PROTO->add("current_object_allpaths",$this->objectAllPaths());
 
 	}
