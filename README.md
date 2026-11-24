@@ -46,7 +46,9 @@ Tested with **PHP 8.5** (PHP-FPM) and **PostgreSQL 18** on Ubuntu 26.04.
 
 ## Installation notes
 
-- The site-specific `docmgr/config/config.php` and `docmgr/config/app-config.php` are **not** in this repository. Create them from the files in `docmgr/install/` and keep them out of deployments.
+For a fresh installation, follow **[INSTALL.md](INSTALL.md)**. The notes below are a summary for existing sites.
+
+- The site-specific `docmgr/config/config.php` and `docmgr/config/app-config.php` are **not** in this repository. Create them from `docmgr/config/config.php.dist` and `app-config.php.dist` (or let the web installer write them); `.gitignore` keeps them out of the repository.
 - Deploy the `docmgr/` directory to the web root, excluding `files/` (the document store) and the two config files, for example:
 
   ```sh
