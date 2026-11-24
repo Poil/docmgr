@@ -173,14 +173,14 @@ class DOCMGR_OBJINDEX extends DOCMGR_AOBJECT
 		object specific indexing functions
 	******************************************************************/
 	
-	function removeTags($string) {
+	static function removeTags($string) {
 	
 		return strip_tags($string);
 
 	}
 	
 	
-	function clean($passString) {
+	static function clean($passString) {
 	
 		$keepIndex = REGEXP_OPTION;
 		
@@ -196,8 +196,6 @@ class DOCMGR_OBJINDEX extends DOCMGR_AOBJECT
 		//make all lowercase
 		$string = mb_strtolower($string,'UTF-8');
 	
-		//clean out anything between a tag
-		if ($cleanTags) $string = $this->removeTags($string);
 	
 		//replace any 10 consecutive blank spaces with 1 space.  This should help keep tsearch2 under the 2k limit
 		$string = str_replace("          "," ",$string);

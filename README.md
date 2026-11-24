@@ -41,6 +41,7 @@ Tested with **PHP 8.5** (PHP-FPM) and **PostgreSQL 18** on Ubuntu 26.04.
 - `count()` on `null` is a fatal `TypeError` since PHP 8 (for example, "add filter" in search returned HTTP 500). Every `count()` on a variable in docmgr's code now uses `count((array) $x)`, which keeps the PHP 7 result (`null` → 0). The two `SimpleXMLElement` counts in `lib/xml.php` and `lib/libxml.php` are unchanged.
 - Bumped `JS_VERSION` in `config/version.php` so browsers reload the upgraded JavaScript instead of the cached 2013 copies.
 - `bin/docmgr-indexer.php`: `debugMsg()` read the undefined `DEBUG` constant, a fatal error since PHP 8, so the indexer died on its first message. Full-text indexing and thumbnails had silently stopped, and uploads just piled up in `docmgr.dm_index_queue`.
+- `apilib/lib/docmgr/objindex.php`: `removeTags()` and `clean()` are called statically from other classes (`DOCMGR_UTIL_FILEINDEX`, `DOCMGR_DOCUMENT`, `DOCMGR_URL`), which is a fatal error since PHP 8. The indexer died on the first `.doc`/OpenOffice file. Both are now `static`. A dead `$cleanTags` branch in `clean()` (an undefined variable, never true) was removed.
 
 ## Installation notes
 
