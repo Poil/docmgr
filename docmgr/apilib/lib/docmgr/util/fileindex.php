@@ -117,7 +117,7 @@ class DOCMGR_UTIL_FILEINDEX
 				if (defined("MAX_OCR")) $count = MAX_OCR;
 				else $count="1";
 				
-				for ($row=0;$row<count($tiffArray);$row++) {
+				for ($row=0;$row<count((array) $tiffArray);$row++) {
 				
 					$pnmArray[$row] = $dir.str_replace(".tif",".pnm",$tiffArray[$row]);
 				
@@ -130,7 +130,7 @@ class DOCMGR_UTIL_FILEINDEX
 				$newstring = DOCMGR_OBJINDEX::clean($string1,null,null);
 	
 				//delete our temp files
-				for ($row=0;$row<count($pnmArray);$row++) {
+				for ($row=0;$row<count((array) $pnmArray);$row++) {
 	
 					$tiffFile = $dir.$tiffArray[$row];
 					//delete the temp file
@@ -239,7 +239,7 @@ class DOCMGR_UTIL_FILEINDEX
 		$newstring .= DOCMGR_UTIL_FILEINDEX::advOcr($fileArray);
 
 		//delete our tmp images
-		for ($row=0;$row<count($fileArray);$row++) unlink($fileArray[$row]);
+		for ($row=0;$row<count((array) $fileArray);$row++) unlink($fileArray[$row]);
 	
 		//remove the temp directory
 		rmdir($dir);
@@ -252,7 +252,7 @@ class DOCMGR_UTIL_FILEINDEX
 	
 		//reduce our file array so we know we don't have empty values
 		$files = reduceArray($fileArray);
-		$num = count($files);
+		$num = count((array) $files);
 		
 		$str = null;
 

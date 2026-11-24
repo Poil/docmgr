@@ -12,7 +12,7 @@ function showColData($catInfo,$keys,$showarr,$parentPath,$permInfo=null)
   {
 
     $subkeys = array_keys($catInfo["parent_id"],$catInfo["id"][$childKey]);
-    $childnum = count($subkeys);
+    $childnum = count((array) $subkeys);
     $data = array();
     
     //if passed permInfo, make sure this is a collection the user can see
@@ -39,7 +39,7 @@ function showColData($catInfo,$keys,$showarr,$parentPath,$permInfo=null)
     }
 
     //user doesn't have permissions to see anything, carry on
-    if (count($data)==0) continue;
+    if (count((array) $data)==0) continue;
 
     //append the name to the parent path to store later
     if ($parentPath=="/") $path = "/".$data["name"];
@@ -54,7 +54,7 @@ function showColData($catInfo,$keys,$showarr,$parentPath,$permInfo=null)
     {
 
       $children = reduceArray(showColData($catInfo,$subkeys,$showarr,$path,$permInfo));
-      if (count($children) > 0) $data["collection"] = $children;
+      if (count((array) $children) > 0) $data["collection"] = $children;
 
     }
     
@@ -101,7 +101,7 @@ function loadBaseCollections($curValue,$root=0,$path="/",$showSearch=null)
 
     if (!is_array($curValue)) $curValue = explode(",",$curValue);
 
-    $num = count($curValue);
+    $num = count((array) $curValue);
 
     for ($i=0;$i<$num;$i++) 
     {
@@ -122,7 +122,7 @@ function loadBaseCollections($curValue,$root=0,$path="/",$showSearch=null)
 
     $data = arrayReduce(showColData($catInfo,$keys,$arr,$path,$permInfo));
 
-    if (count($data) > 0)
+    if (count((array) $data) > 0)
       foreach ($data AS $col) $PROTO->add("collection",$col);
 
   }

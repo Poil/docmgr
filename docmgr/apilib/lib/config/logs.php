@@ -28,14 +28,14 @@ class CONFIG_LOGS extends CONFIG
 
     //get the count first
     $sql = "SELECT count(id) AS total_count FROM logger.logs";
-    if (count($filterArr) > 0) $sql .= " WHERE id IN (".implode(" INTERSECT ",$filterArr).") ";
+    if (count((array) $filterArr) > 0) $sql .= " WHERE id IN (".implode(" INTERSECT ",$filterArr).") ";
     $info = $this->DB->single($sql);
     
     $this->PROTO->add("total_count",$info["total_count"]);
 
     //now run the limited query
     $sql = "SELECT id,message,level,category,log_timestamp,ip_address,user_id,user_login,data FROM logger.logs ";
-    if (count($filterArr) > 0) $sql .= " WHERE id IN (".implode(" INTERSECT ",$filterArr).") ";
+    if (count((array) $filterArr) > 0) $sql .= " WHERE id IN (".implode(" INTERSECT ",$filterArr).") ";
     $sql .= " ORDER BY log_timestamp DESC LIMIT ".$searchLimit." OFFSET ".$searchOffset;
 
     $results = $this->DB->fetch($sql);
@@ -60,7 +60,7 @@ class CONFIG_LOGS extends CONFIG
     $dataTypes = $this->apidata["data_types"];;
        
     //loop through our optional filters
-    for ($i=0;$i<count($filters);$i++)
+    for ($i=0;$i<count((array) $filters);$i++)
     {
       if ($filters[$i]=="category") $filterArr[] = $this->categoryFilter($matches[$i],$values[$i]);    
       else if ($filters[$i]=="log_timestamp") $filterArr[] = $this->timestampFilter($matches[$i],$values[$i]);    

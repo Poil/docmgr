@@ -123,7 +123,7 @@ function showModTabs($path,$module=null)
 	$string = null;
 	$counter = "0";
 
-	$num = count($siteModList["owner_path"]);
+	$num = count((array) $siteModList["owner_path"]);
 
 	for ($row=0;$row<$num;$row++) {
 
@@ -192,7 +192,7 @@ function getModules($path,$module=null)
 	$string = null;
 	$counter = "0";
 
-	$num = count($siteModList["owner_path"]);
+	$num = count((array) $siteModList["owner_path"]);
 	$ret = array();
 	
 	for ($row=0;$row<$num;$row++) {
@@ -249,7 +249,7 @@ function showModTable($path,$sort = null) {
 
 	$counter = "0";
 
-	$num = count($siteModList["module_name"]);
+	$num = count((array) $siteModList["module_name"]);
 	$cell = "0";
 	
 	for ($row=0;$row<$num;$row++) {
@@ -374,7 +374,7 @@ function showModLinks($path,$module,$filter=null)
 
 	$counter = "0";
 
-	$num = count($siteModList["owner_path"]);
+	$num = count((array) $siteModList["owner_path"]);
 
 	$baseImg = THEME_PATH."/images/modules/module.png";
 
@@ -510,7 +510,7 @@ function getCustomModPerms($module,$recursive="yes")
 	array_pop($arr);
 
 	//get the permissions for each module
-	for ($row=0;$row<count($arr);$row++) {
+	for ($row=0;$row<count((array) $arr);$row++) {
 
 		$mod = $arr[$row];
 
@@ -658,7 +658,7 @@ function modTreeMenu($module) {
 
 	$arr = getRecursiveModInfo($module);
 
-	$num = count($arr);
+	$num = count((array) $arr);
 
 	for ($row=0;$row<$num;$row++) 
 	{
@@ -698,8 +698,8 @@ function showModLevel($path,$sort)
 	asort($arr);
 	
 	$sortArray = array_keys($arr);
-	$count = count($sortArray);
-	$fieldCount = count($fields);
+	$count = count((array) $sortArray);
+	$fieldCount = count((array) $fields);
 	
 	for ($row=0;$row<$count;$row++) 
 	{
@@ -741,7 +741,7 @@ function showModTableAlt($path,$sort,$altStyle,$decorStyle) {
 
 	$counter = "0";
 
-	$num = count($siteModList["module_name"]);
+	$num = count((array) $siteModList["module_name"]);
 	$cell = "0";
 	
 	for ($row=0;$row<$num;$row++) {

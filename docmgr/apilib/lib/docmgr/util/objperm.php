@@ -22,7 +22,7 @@ class DOCMGR_UTIL_OBJPERM
 		$d = new DOCMGR($objId);
 		$children = $d->getChildObjects($objId);
 
-		if (count($children) > 0)
+		if (count((array) $children) > 0)
 		{
 
 			//get permissions for this object
@@ -156,7 +156,7 @@ class DOCMGR_UTIL_OBJPERM
 			if ($search_string) $filter[] = " name ILIKE '".$search_string."%' ";
 
 			//assemble the filter
-			if (count($filter)>0) $sql .= " WHERE ".implode(" AND ",$filter)." ";
+			if (count((array) $filter)>0) $sql .= " WHERE ".implode(" AND ",$filter)." ";
 			$sql .= " ORDER BY name";
 			$groupList = $DB->fetch($sql);
 
@@ -179,7 +179,7 @@ class DOCMGR_UTIL_OBJPERM
 		}
 
 		//dprint(print_r($searchResults,1));
-		$num = count($searchResults["id"]);
+		$num = count((array) $searchResults["id"]);
 
 		/**************************************************
 			handle the Everyone group
@@ -489,7 +489,7 @@ class DOCMGR_UTIL_OBJPERM
 		//first, narrow it down to the object
 		$keys = @array_keys($arr["object_id"],$objId);
 		
-		if (count($keys) == 0) return false;
+		if (count((array) $keys) == 0) return false;
 		
 		$groupArray = @explode(",",USER_GROUPS);
 		$bitmask = "00000000";
@@ -523,7 +523,7 @@ class DOCMGR_UTIL_OBJPERM
 		//first, narrow it down to the object
 		$keys = @array_keys($arr["object_id"],$objId);
 
-		if (count($keys) == 0) return $share;
+		if (count((array) $keys) == 0) return $share;
 		
 		//now loop through our keys and start stacking up permissions for this user or their groups
 		foreach ($keys AS $key) 

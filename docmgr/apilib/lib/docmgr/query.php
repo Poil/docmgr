@@ -77,7 +77,7 @@ class DOCMGR_QUERY extends DOCMGR_AOBJECT
 
       //fix the icon link to only have the name
       $arr = explode("/",$data[$i]["icon"]);
-      $data[$i]["icon"] = $arr[count($arr)-1];
+      $data[$i]["icon"] = $arr[count((array) $arr)-1];
 
       //add file extension
       if ($data[$i]["object_type"]=="file") 
@@ -200,7 +200,7 @@ class DOCMGR_QUERY extends DOCMGR_AOBJECT
 		$opt["data_type"] = array();
 		    
     //passed keyword filters
-		for ($i=0;$i<count($this->apidata["keyword_filters"]);$i++)
+		for ($i=0;$i<count((array) $this->apidata["keyword_filters"]);$i++)
 		{
 			//only proceed if we have a value
 			if ($this->apidata["keyword_values"][$i]!=null)
@@ -213,7 +213,7 @@ class DOCMGR_QUERY extends DOCMGR_AOBJECT
 		}
 
 		//passed standard filters       
-		for ($i=0;$i<count($this->apidata["filters"]);$i++)
+		for ($i=0;$i<count((array) $this->apidata["filters"]);$i++)
 		{
 			//only proceed if we have a value
 			if ($this->apidata["values"][$i]!=null)
@@ -268,7 +268,7 @@ class DOCMGR_QUERY extends DOCMGR_AOBJECT
 
 			//fix the icon link to only have the name
 			$arr = explode("/",$data[$i]["icon"]);
-			$data[$i]["icon"] = $arr[count($arr)-1];
+			$data[$i]["icon"] = $arr[count((array) $arr)-1];
 
       //add file extension
       if ($data[$i]["object_type"]=="file") 

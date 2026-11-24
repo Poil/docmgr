@@ -103,7 +103,7 @@ function sanitizeArray($obj,$es=null)
 	if (!$es) $es = array();
 
 	//nothing to do, bail
-	if (!$obj || count($obj)==0) return array();
+	if (!$obj || count((array) $obj)==0) return array();
 
   //loop through and process	
 	foreach ($obj AS $key=>$val)

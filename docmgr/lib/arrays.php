@@ -33,7 +33,7 @@ function cs_in_array($string,$object) {
 
 	$returnValue = null;
 
-	for ($row=0;$row<count($object);$row++) {
+	for ($row=0;$row<count((array) $object);$row++) {
 
 		$tempValue = strtolower($object[$row]);
 
@@ -62,7 +62,7 @@ function multi_array_unique($array1,$array2) {
 	$newArray1 = array();
 	$newArray2 = array();
 
-	for ($row=0;$row<count($array1);$row++) {
+	for ($row=0;$row<count((array) $array1);$row++) {
 
 		if (!in_array($array1[$row],$newArray1)) {
 
@@ -109,7 +109,7 @@ function arrayCombine($keyArray,$valArray) {
 	$valArray = array_values($valArray);
 		
 	$arr = array();
-	$num = count($keyArray);
+	$num = count((array) $keyArray);
 
 	for ($row=0;$row<$num;$row++) {
 		$key = $keyArray[$row];
@@ -129,7 +129,7 @@ function arrayCombine($keyArray,$valArray) {
 
 function transposeArray($arr) {
 
-	if (!is_array($arr) || count($arr)==0) return array();
+	if (!is_array($arr) || count((array) $arr)==0) return array();
 
 	foreach ($arr AS $keymaster => $value) {
                 
@@ -172,14 +172,14 @@ function arrayMultiSort($modArray,$sort,$dir="ASC") {
 	//there should be one of these in every array entry.  This way, if some of
 	//our sort fields are empty, we can pad the sort array to the required length
 	$idx = $fields[0];
-	$realSize = count($modArray[$idx]);
+	$realSize = count((array) $modArray[$idx]);
 
 	//sort our array 
 	if ($dir=="DESC") arsort($arr);
 	else asort($arr);
 
 	//the size of our sorted field
-	$sortSize = count($arr);
+	$sortSize = count((array) $arr);
 
 	//if our sort size is smaller than our actual size, pad to the real size so we don't lose any modules.
 	//the value we pad it with should ensure it gets placed last whether it's a numeric or alpha sort
@@ -197,7 +197,7 @@ function arrayMultiSort($modArray,$sort,$dir="ASC") {
 	//get all the keys from our sorted array.  We need to loop by these to maintain
 	//index association with the rest of the array
 	$sortArray = array_keys($arr);
-	$fieldCount = count($fields);
+	$fieldCount = count((array) $fields);
 
 	//resort our original array.  Map the new field->key to it's original index	
 	foreach ($sortArray AS $key) {
@@ -287,7 +287,7 @@ function arrayReduce($arr) {
 //find average of all values in an array
 function arrayAverage($input) {
 
-	$max = count($input);
+	$max = count((array) $input);
 	if ($max==0) return 0;
 
 	return array_sum($input) / $max;
@@ -309,7 +309,7 @@ function parseRange($str) {
 		$range = explode("-",$entry);
 
 		//if more than one entry, we have a range.otherwise we have a single entry
-		if (count($range)==1) $ret[] = $range[0];
+		if (count((array) $range)==1) $ret[] = $range[0];
 		else $ret = array_merge($ret,range($range[0],$range[1]));
 
 	}
@@ -324,7 +324,7 @@ function removeNumericKeys($arr) {
   $ret = array();
   $keys = array_keys($arr);
   
-  if (count($keys) > 0) {
+  if (count((array) $keys) > 0) {
       
     foreach ($keys AS $key) {
   
@@ -346,7 +346,7 @@ function urldecodeArray($obj,$es = null)
 {
 
   if (!$es) $es = array();
-  if (count($obj)==0) return false;
+  if (count((array) $obj)==0) return false;
 
   foreach ($obj AS $key=>$val) 
   {

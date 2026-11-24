@@ -107,7 +107,7 @@ class DOCMGR_INTRANET extends DOCMGR {
 		}
 
 		$arr = explode(",",$this->objectInfo["objectid_path"]);
-		$parent = $arr[count($arr)-1];
+		$parent = $arr[count((array) $arr)-1];
 
 		
     $s = new DOCMGR_QUERY(array("object_id"=>$parent));

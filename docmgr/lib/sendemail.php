@@ -214,7 +214,7 @@ class SENDEMAIL
 		$email = array_pop($arr);
 		$name = "";
 		
-		if (count($arr) > 0) $name = implode(" ",$arr);
+		if (count((array) $arr) > 0) $name = implode(" ",$arr);
 		
 		return array($email,$name);
 		

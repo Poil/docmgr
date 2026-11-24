@@ -36,7 +36,7 @@ function loadSiteStructure($dir) {
 				//get config files of all modules in passed directory	
         $arr = findModConfig($dir);
 
-				$num = count($arr);
+				$num = count((array) $arr);
         for ($row=0;$row<$num;$row++) {
 
         	$path = $arr[$row];
@@ -84,7 +84,7 @@ function setPermDefines() {
 
 	if ($permArray) {
 
-		for ($row=0;$row<count($permArray["name"]);$row++) {
+		for ($row=0;$row<count((array) $permArray["name"]);$row++) {
 
 			$dn = $permArray["define_name"][$row];
 			$bitVal = bitCal($permArray["bitpos"][$row]);
@@ -126,7 +126,7 @@ function setCustomPermDefines() {
 
 	if ($permArray) {
 
-		for ($row=0;$row<count($permArray["name"]);$row++) {
+		for ($row=0;$row<count((array) $permArray["name"]);$row++) {
 	
 			$dn = $permArray["define_name"][$row];
 			$bitVal = bitCal($permArray["bitpos"][$row]);
@@ -406,7 +406,7 @@ function xmlEntry($key,$data,$ignore = null) {
 function tableToXml($data) {
 
 	$keys = array_keys($data);
-	$num = count($keys);
+	$num = count((array) $keys);
 	$str = null;
 	
 	//get all fields and convert data to xml
@@ -424,7 +424,7 @@ function tableToXml($data) {
 function arrayToXml($arr,$passKey = null) {
 
 	//make sure there's something there
-	if (count($arr)==0) return false;
+	if (count((array) $arr)==0) return false;
 	if (!is_array($arr)) return false;
 	
 	$keys = array_keys($arr);

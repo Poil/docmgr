@@ -271,7 +271,7 @@ class PROTO
     if (is_array($val))
     {
 
-      if (count($val) > 0)
+      if (count((array) $val) > 0)
       {
       
         foreach ($val AS $key=>$data)	$this->checkUTF8($val[$key]);

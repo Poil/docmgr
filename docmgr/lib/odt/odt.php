@@ -215,10 +215,10 @@ class ODT
     $table = $this->content->createElement("table:table");  
     $table->setAttribute("table:style-name",$styleName);
     $table->setAttribute("table:name",$tableName);
-    $table->setAttribute("table:number-columns-repeated",count($arr[0]));
+    $table->setAttribute("table:number-columns-repeated",count((array) $arr[0]));
 
     //create our columns
-    for ($i=0;$i<count($arr[0]);$i++)
+    for ($i=0;$i<count((array) $arr[0]);$i++)
     {
 
       $col = $this->content->createElement("table:table-column");
@@ -250,9 +250,9 @@ class ODT
 
     }
 
-    if ($header && count($header) > 0) 	$this->addRows($table,"TableHeader",$header,$headerAlignArr);
-    if ($arr && count($arr) > 0) 				$this->addRows($table,"TableCell",$arr,$alignArr);
-    if ($footer && count($footer) > 0) 	$this->addRows($table,"TableFooter",$footer);
+    if ($header && count((array) $header) > 0) 	$this->addRows($table,"TableHeader",$header,$headerAlignArr);
+    if ($arr && count((array) $arr) > 0) 				$this->addRows($table,"TableCell",$arr,$alignArr);
+    if ($footer && count((array) $footer) > 0) 	$this->addRows($table,"TableFooter",$footer);
      
     $this->body->appendChild($table); 
   
@@ -342,7 +342,7 @@ class ODT
     $ext = fileExtension($fileName);
 
     //how it will be stored    
-    $imgdest = "Pictures/Image".count($this->images).".".$ext;
+    $imgdest = "Pictures/Image".count((array) $this->images).".".$ext;
     
     $this->images[] = array($imgsrc,$imgdest);
    
@@ -490,7 +490,7 @@ class ODT
     shell_exec("$cmd");
 
     //copy all images
-    for ($i=0;$i<count($this->images);$i++)
+    for ($i=0;$i<count((array) $this->images);$i++)
     {
 
       $img = &$this->images[$i];

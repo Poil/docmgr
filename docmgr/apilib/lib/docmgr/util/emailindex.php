@@ -66,7 +66,7 @@ class DOCMGR_UTIL_EMAILINDEX
 			$textEnc = null;
 			$htmlEnc = null;
 			  
-		  for ($i=1;$i<count($arr);$i++)
+		  for ($i=1;$i<count((array) $arr);$i++)
 		  {
 		
 		    $type = $this->getContentType($arr[$i]);
@@ -209,7 +209,7 @@ class DOCMGR_UTIL_EMAILINDEX
 	{
 	
 	  $arr = explode("\n",$this->content);
-	  $num = count($arr);
+	  $num = count((array) $arr);
 	
 	  for ($i=0;$i<$num;$i++) {
 	    $str = substr($arr[$i],0,2);

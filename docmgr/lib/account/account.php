@@ -121,7 +121,7 @@ class ACCOUNT
 			//name searching
 			$arr = organizeName($this->searchString);
 	
-			if (count($arr)==1)
+			if (count((array) $arr)==1)
 			{
 				$filter[] = "(first_name ILIKE '".$arr["ln"]."%' OR last_name ILIKE '".$arr["ln"]."%')";
 			}
@@ -257,7 +257,7 @@ class ACCOUNT
 									">"
 									);
  
-		$num = count($arr);
+		$num = count((array) $arr);
 
 		for ($row=0;$row<$num;$row++) if (strstr($login,$arr[$row])) return false;
 
@@ -498,7 +498,7 @@ class ACCOUNT
 		$ldap = $this->loadPlugin("ldap");
 
 		$results = $ldap->search();
-		$num = count($results);
+		$num = count((array) $results);
 
 		//for storing valid accounts
 		$idArr = array();
@@ -564,7 +564,7 @@ class ACCOUNT
 	
 		$this->cachedList();
 
-		$num = count($GLOBALS["cachedAccountList"]);
+		$num = count((array) $GLOBALS["cachedAccountList"]);
 		$info = null;
 	
 		//loop through our cache and find the match	

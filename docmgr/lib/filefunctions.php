@@ -10,7 +10,7 @@ function listDir($path,$rec=1,$filter=null) {
   $ret = array();
   
   $arr = scandir($path);
-  $num = count($arr);
+  $num = count((array) $arr);
   
   for ($i=0;$i<$num;$i++) {
 
@@ -57,7 +57,7 @@ function emptyDir($path)
 
   $files = listDir($path);
   
-  if (count($files)==0) return false;
+  if (count((array) $files)==0) return false;
 
   //this makes sure the files in a directory are gone before we
   //try to delete the actual directory
@@ -216,7 +216,7 @@ function fileInfo($file) {
   }
   
   $ext = fileExtension($file);
-  $num = count($_SESSION["extensions"]);
+  $num = count((array) $_SESSION["extensions"]);
 
   $fileinfo = array();
   
@@ -340,7 +340,7 @@ function copyDir($src,$dest)
 	//make our destination
 	recurMkDir($dest);
 	
-	if (count($list) > 0)
+	if (count((array) $list) > 0)
 	{
 	
 		foreach ($list AS $path)

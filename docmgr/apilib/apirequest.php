@@ -206,7 +206,7 @@ class APIREQUEST
 		  $cmdarr = explode("_",$this->body["command"]);
 	
 		  //continue only if we have the proper app_object_method structure
-		  if (count($cmdarr) == 3)
+		  if (count((array) $cmdarr) == 3)
 		  {
 	
 		    //subclass name

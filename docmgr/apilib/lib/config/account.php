@@ -410,7 +410,7 @@ class CONFIG_ACCOUNT extends CONFIG
     $g = new CONFIG_GROUP($this->apidata);
     $groups = $g->search(1);
     
-    $num = count($groups);
+    $num = count((array) $groups);
     
     for ($i=0;$i<$num;$i++)
     {
@@ -449,7 +449,7 @@ class CONFIG_ACCOUNT extends CONFIG
     $this->DB->query($sql);
 
     //add new ones   
-    for ($i=0;$i<count($this->apidata["group_id"]);$i++)
+    for ($i=0;$i<count((array) $this->apidata["group_id"]);$i++)
     {
       $gid = $this->apidata["group_id"][$i];
       $opt["account_id"] = $this->accountId;

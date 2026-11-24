@@ -65,7 +65,7 @@ class DOCMGR_WORKFLOW extends DOCMGR
 				$results = $this->DB->fetch($sql);
 				
 				//all of them must be accessible by the current user
-				if ($results["count"] < count($arr)) $check = false;				
+				if ($results["count"] < count((array) $arr)) $check = false;				
 
 			}
 			
@@ -168,7 +168,7 @@ class DOCMGR_WORKFLOW extends DOCMGR
 			if ($this->workflowId)
 			{
 	
-				for ($i=0;$i<count($this->objectId);$i++)
+				for ($i=0;$i<count((array) $this->objectId);$i++)
 				{
 	
 					$opt = null;
@@ -317,7 +317,7 @@ class DOCMGR_WORKFLOW extends DOCMGR
 			$objarr = $this->DB->fetch($sql,1);
 			
 			//create a new task for every account and every object passed		
-			for ($i=0;$i<count($accountId);$i++) 
+			for ($i=0;$i<count((array) $accountId);$i++) 
 			{
 
 				//make sure this account doesn't already have an entry in this stage

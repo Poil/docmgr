@@ -481,7 +481,7 @@ class OPENOFFICE
     }
 
     //if we don't have any pictures, we can stop here
-    if (count($pics) > 0)
+    if (count((array) $pics) > 0)
     {
 	
 	    if ($this->objectId) 
@@ -515,7 +515,7 @@ class OPENOFFICE
       $dom->loadHTML(file_get_contents($dest));
       $imgs = $dom->getElementsByTagName("img");
 
-      for ($i=0;$i<count($pics);$i++)
+      for ($i=0;$i<count((array) $pics);$i++)
       {
 
         //easy access, baby      

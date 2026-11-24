@@ -106,7 +106,7 @@ class DOCMGR_IMPORT extends DOCMGR
   
 		$fileArr = $this->apidata["file"];		  
   
-		if (count($fileArr) == 0)
+		if (count((array) $fileArr) == 0)
 		{
 			$this->throwError(_I18N_FILES_PASSED_ERROR);
 			return false;
@@ -230,13 +230,13 @@ class DOCMGR_IMPORT extends DOCMGR
 
   	$files = $this->apidata["file"];
   
-    if (count($files)==0) 
+    if (count((array) $files)==0) 
     {
       $this->throwError(_I18N_FILES_SPECIFY_MERGE_ERROR);
       return false;
     }
 
-    if (count($files)==1) 
+    if (count((array) $files)==1) 
     {
       $this->throwError(_I18N_FILES_SPECIFY_MULTIPLE_ERROR);
       return false;
@@ -245,19 +245,19 @@ class DOCMGR_IMPORT extends DOCMGR
     $this->setBrowsePath();
 
     //convert our array to a full filepath
-    for ($i=0;$i<count($files);$i++)
+    for ($i=0;$i<count((array) $files);$i++)
     {
     	$files[$i] = $this->browsepath."/".$files[$i];
     }
 
     //the output file is the first file
     $arr = explode("/",$files[0]);
-    $arr[count($arr)-1] = "merged-".$arr[count($arr)-1];
+    $arr[count((array) $arr)-1] = "merged-".$arr[count((array) $arr)-1];
     $output = implode("/",$arr);
 
     //use ghostscript to merge the files
     $cmd = APP_GS." -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE=\"".$output."\" -dBATCH";
-    for ($i=0;$i<count($files);$i++)  $cmd .= " \"".$files[$i]."\" ";
+    for ($i=0;$i<count((array) $files);$i++)  $cmd .= " \"".$files[$i]."\" ";
 
     shell_exec("$cmd");
     
@@ -269,7 +269,7 @@ class DOCMGR_IMPORT extends DOCMGR
     else
     {
       //it does exist, remove the originals
-      for ($i=0;$i<count($files);$i++)  unlink($files[$i]);
+      for ($i=0;$i<count((array) $files);$i++)  unlink($files[$i]);
     }
           
   }  
@@ -345,7 +345,7 @@ class DOCMGR_IMPORT extends DOCMGR
   
     //get the name with the new extension
     $arr = explode("/",$file);
-    $name = $arr[count($arr)-1];
+    $name = $arr[count((array) $arr)-1];
     $ext = return_file_extension($name);
     $name = str_replace(".".$ext,".png",$name);
     return $name;

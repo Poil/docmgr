@@ -56,7 +56,7 @@ function createCollectionFilter($colVal)
 		$colArr = explode(",",$colVal);
 
 	//merge all selected collections and their children into one array
-	$num = count($colArr);
+	$num = count((array) $colArr);
 	$cv = $colArr;
 	
 	for ($i=0;$i<$num;$i++) 
@@ -147,12 +147,12 @@ function createObjectTypeFilter($match,$value) {
 		
 	}
 	
-	if (count($sqlarr)>0) {
+	if (count((array) $sqlarr)>0) {
 	
 		$sqlarr = array_values(array_unique($sqlarr));
 		
 		//if we have 4 different types, no filter
-		if (count($sqlarr)==4) return false;
+		if (count((array) $sqlarr)==4) return false;
 		else return "(".implode(" UNION ",$sqlarr).")";
 	
 	} else return false;
@@ -172,7 +172,7 @@ function execSearch($opt) {
 	/***********************************************************
 		process our search filters
 	***********************************************************/
-	for ($i=0;$i<count($filter);$i++)
+	for ($i=0;$i<count((array) $filter);$i++)
 	{
 
 		if ($filter[$i]=="keyword") continue;
@@ -188,7 +188,7 @@ function execSearch($opt) {
 	}
 
 	//our keyword filters
-	for ($i=0;$i<count($keywordFilter);$i++)
+	for ($i=0;$i<count((array) $keywordFilter);$i++)
 	{
 		$ret = createKeywordFilter($keywordFilter[$i],$keywordMatch[$i],$keywordValue[$i]);
 		if ($ret) $sqlArr[] = $ret;
@@ -241,7 +241,7 @@ function execSearch($opt) {
 	$sqlArr = arrayReduce($sqlArr);
 
 	//merge our query arrays	
-	if (count($sqlArr) > 0) {
+	if (count((array) $sqlArr) > 0) {
 		if (strstr($sql,"WHERE")) $sql .= " AND id IN (".implode(" INTERSECT ",$sqlArr).")";
 		else $sql .= " WHERE id IN (".implode(" INTERSECT ",$sqlArr).")";
 	}
@@ -284,7 +284,7 @@ function execSearch($opt) {
 	else $idArr = $_SESSION["api"]["searchResultArray"];
 
 	//limit our array to the current page
-	if (count($idArr) > 0) 
+	if (count((array) $idArr) > 0) 
 	{
 
 		//merge in our file info
@@ -395,7 +395,7 @@ function mergeRelatedInfo($results,$curArr)
 	//merge our collection values in
 	for ($i=0;$i<$results["count"];$i++) {
 		$keys = @array_keys($colarr["object_id"],$results[$i]["id"]);
-		if (count($keys) > 0) {
+		if (count((array) $keys) > 0) {
 			$c = 0;
 			foreach ($keys AS $key) {
 				$results[$i]["related"][$c]["id"] = $colarr["related_id"][$key];			
@@ -423,8 +423,8 @@ function mergeDiscussionInfo($results,$curArr)
 	//merge our collection values in
 	for ($i=0;$i<$results["count"];$i++) {
 		$keys = @array_keys($discArr["object_id"],$results[$i]["id"]);
-		$num = count($keys);
-		if ($num > 0) $results[$i]["discussion"] = count($keys);
+		$num = count((array) $keys);
+		if ($num > 0) $results[$i]["discussion"] = count((array) $keys);
 	}
 
 	return $results;
@@ -457,7 +457,7 @@ function createTsearch2Sql($opt) {
 
 	extract($opt);
 
-	if (!$search_option || count($search_option)==0) $search_option = array("name","summary","content");
+	if (!$search_option || count((array) $search_option)==0) $search_option = array("name","summary","content");
 
 	//show ranks in the table
 	$_SESSION["api"]["showRank"] = 1;
@@ -467,7 +467,7 @@ function createTsearch2Sql($opt) {
 	$rank = null;
 
 	//setup lexem
-	if (count($search_option)==3) $lexeme = "@@";
+	if (count((array) $search_option)==3) $lexeme = "@@";
 	else $lexeme = "@@@";
 
 	/********************************************
@@ -561,13 +561,13 @@ function formatTsearch2String($string,$option) {
 	if (!strlen($wordString)) return false;
 
 	//if file_name,summary, or content are checked, this appends weights to the end of our strings
-	if (count($option)<3) 
+	if (count((array) $option)<3) 
 	{
 
-		$num = count($option);
+		$num = count((array) $option);
 		
 		$arr = explode(" ",$wordString);
-		$lnum = count($arr);
+		$lnum = count((array) $arr);
 		$skip = array("and","or","not");
 
 		for ($row=0;$row<$num;$row++) {
@@ -614,7 +614,7 @@ function formatSqlString($field,$string) {
 	$st = 1;
 	$join = null;
 	
-	for ($row=0;$row<count($arr);$row++) {
+	for ($row=0;$row<count((array) $arr);$row++) {
 
 		if (!$arr[$row]) continue;
 

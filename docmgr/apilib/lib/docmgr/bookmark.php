@@ -239,7 +239,7 @@ class DOCMGR_BOOKMARK extends DOCMGR
 		$r = null;
 		
 		//if there are some bookmarks for this user, make sure we have the required ones
-		for ($i=0;$i<count($list);$i++)
+		for ($i=0;$i<count((array) $list);$i++)
 		{
 
 			$b = $list[$i];

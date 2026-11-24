@@ -94,7 +94,7 @@ class LOGGER {
     is no error to return
   ******************************************************************************/
   public function getLastError() {		
-    $num = count($this->errorStack);
+    $num = count((array) $this->errorStack);
     if ($num=="0") return false;
     else return $this->errorStack[$num-1];
   }
@@ -106,7 +106,7 @@ class LOGGER {
   ******************************************************************************/
   public function getLastErrorMsg($sep = "html") {
 
-    $num = count($this->errorStack);
+    $num = count((array) $this->errorStack);
     if ($num=="0") return false;
     else {
 
@@ -131,7 +131,7 @@ class LOGGER {
   ******************************************************************************/
   public function getAllErrorMsgs($sep = "html") {
 
-    $num = count($this->errorStack);
+    $num = count((array) $this->errorStack);
 
     if ($sep=="html") $div = "<br>\n";
     else $div = "\n";

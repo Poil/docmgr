@@ -34,13 +34,13 @@ class DOCMGR_PDF extends DOCMGR
 		$filepath = array();
 		$obj = $this->objectId;
 
-		if (count($obj)==0) 
+		if (count((array) $obj)==0) 
 		{
 			$this->throwError(_I18N_NOMERGEFILE_ERROR);
 			return false;
 		}
 
-		if (count($obj)==1) 
+		if (count((array) $obj)==1) 
 		{
 			$this->throwError(_I18N_ONEMERGEFILE_ERROR);
 			return false;
@@ -58,7 +58,7 @@ class DOCMGR_PDF extends DOCMGR
  		  return false;
 	  }
 
-		for ($i=0;$i<count($obj);$i++) 
+		for ($i=0;$i<count((array) $obj);$i++) 
 		{
 
 			$sql = "SELECT id FROM docmgr.dm_file_history WHERE object_id='".$obj[$i]."' ORDER BY version DESC LIMIT 1";
@@ -73,7 +73,7 @@ class DOCMGR_PDF extends DOCMGR
 		$output = TMP_DIR."/merged-".USER_ID.".pdf";
 		
 		$cmd = APP_GS." -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE=\"".$output."\" -dBATCH";
-		for ($i=0;$i<count($obj);$i++) $cmd .= " \"".$filepath[$i]."\"";
+		for ($i=0;$i<count((array) $obj);$i++) $cmd .= " \"".$filepath[$i]."\"";
 
 		//run the merge
 		shell_exec("$cmd 1> /tmp/merge1 2>/tmp/merge2");
@@ -92,7 +92,7 @@ class DOCMGR_PDF extends DOCMGR
 		$f->save();
 
 		//now delete the other guys
-		for ($i=1;$i<count($obj);$i++) 
+		for ($i=1;$i<count((array) $obj);$i++) 
 		{
 		
 		  $this->objectId = $obj[$i];

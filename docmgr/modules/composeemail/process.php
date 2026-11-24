@@ -77,7 +77,7 @@ else if ($_REQUEST["mode"]=="forward")
   {
   
     //loop through the attachments
-    for ($i=0;$i<count($ret["attach"]);$i++) 
+    for ($i=0;$i<count((array) $ret["attach"]);$i++) 
     {
     
       //write the file to our attachment directory so we can forward it
@@ -128,7 +128,7 @@ else if ($_REQUEST["mode"]=="draft")
   {
   
     //loop through the attachments
-    for ($i=0;$i<count($ret["attach"]);$i++) 
+    for ($i=0;$i<count((array) $ret["attach"]);$i++) 
     {
     
       //write the file to our attachment directory so we can forward it
@@ -221,7 +221,7 @@ if ($emailContent && BROWSER_MOBILE=="t")
 
   //remove leading spaces
   $arr = explode("\n",$emailContent);
-  $num = count($arr);
+  $num = count((array) $arr);
   
   for ($i=0;$i<$num;$i++) 
   {

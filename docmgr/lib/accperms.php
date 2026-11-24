@@ -91,10 +91,10 @@ function groupPerm($conn,$optionArray) {
     $string = "<table border=0 cellpadding=0 cellspacing=0>";
 
     //display an error message if no perms exist for this app
-    if (count($perm_id_array)==0) $string .= "<tr><td>No permissions are defined.</td></tr>";
+    if (count((array) $perm_id_array)==0) $string .= "<tr><td>No permissions are defined.</td></tr>";
     else {
 
-        for ($num=0;$num<count($perm_id_array);$num++) {
+        for ($num=0;$num<count((array) $perm_id_array);$num++) {
 
             $bitSet = bitCal($perm_bitpos_array[$num]);
 

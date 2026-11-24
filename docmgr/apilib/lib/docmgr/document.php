@@ -486,7 +486,7 @@ class DOCMGR_DOCUMENT extends DOCMGR_AOBJECT
 		//create a new array with the swapped orders
 		$temp = array($documentId);
 		foreach ($info["id"] AS $id) if ($id!=$documentId) $temp[] = $id;
-		$num = count($temp);
+		$num = count((array) $temp);
 	
 		for ($row=0;$row<$num;$row++) 
 		{

@@ -123,7 +123,7 @@ class ACCOUNT_LDAP
 
 		//put all the account ids into an array
 		unset($res["count"]);
-		$num = count($res);
+		$num = count((array) $res);
 		for ($i=0;$i<$num;$i++) $ids[] = $res[$i][strtolower(LDAP_UIDNUMBER)][0];
 		
 		return max($ids);
@@ -421,7 +421,7 @@ class ACCOUNT_LDAP
 
 		$list = $this->search("(".LDAP_UID."=".$login.")");
 	
-		if (count($list) > 0)
+		if (count((array) $list) > 0)
 		{
 
 			//if passed the digest hash, just hit the database directly to fetch it

@@ -97,7 +97,7 @@ class EMAIL_ATTACH extends EMAIL
 		//remove directory markers
 		array_shift($files);
 		array_shift($files);
-		$num = count($files);
+		$num = count((array) $files);
 
 		$attach = array();
 			

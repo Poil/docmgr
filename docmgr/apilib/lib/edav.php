@@ -87,7 +87,7 @@ class EDAV
 	    $info = $b->getByName();
 
 	    //if only one deep, we only have a bookmark name
-	    if (count($arr) > 1)
+	    if (count((array) $arr) > 1)
 	    {
 	      //remove the bookmark
 	      array_shift($arr);

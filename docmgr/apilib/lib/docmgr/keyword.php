@@ -114,7 +114,7 @@ class DOCMGR_KEYWORD extends DOCMGR
 
 		$sql = "DELETE FROM docmgr.keyword_value WHERE object_id='".$this->objectId."';";
 		
-		for ($i=0;$i<count($ids);$i++)
+		for ($i=0;$i<count((array) $ids);$i++)
 		{
 		
 			//don't save noentries

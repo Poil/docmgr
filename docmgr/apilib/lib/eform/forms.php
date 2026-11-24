@@ -234,7 +234,7 @@ class EFORM_FORMS extends EFORM
 		  //split the api into it's parts
 		  $tmp = explode("_",$api_command);
 
-		  if (count($tmp)!=3)
+		  if (count((array) $tmp)!=3)
 		  {
 		  	$this->throwError("API command must have 3 segments");
 		  	return false;
@@ -260,7 +260,7 @@ class EFORM_FORMS extends EFORM
 		  if (!$title_field) $title_field = "name";
 		  if (!$data_field) $data_field = "id";
 		
-		  $num = count($list);
+		  $num = count((array) $list);
 		  
 		  for ($i=0;$i<$num;$i++)
 		  {

@@ -18,7 +18,7 @@ class ADDRESSBOOK_CONTACT extends ADDRESSBOOK
       $results = $this->DB->fetch($sql);
       
 			//we have permission to access all of them
-      if ($results["count"] >= count($ids)) $this->contactId = $this->apidata["contact_id"];
+      if ($results["count"] >= count((array) $ids)) $this->contactId = $this->apidata["contact_id"];
       else $this->throwError(_I18N_PERMISSION_DENIED);
     
     }
@@ -57,7 +57,7 @@ class ADDRESSBOOK_CONTACT extends ADDRESSBOOK
 	  //name searching
 	  $arr = organizeName($ss);
 	 
-	  if (count($arr)==1)
+	  if (count((array) $arr)==1)
 	  {
 	    $filter[] = "(lower(first_name) ILIKE '".$arr["ln"]."%' OR lower(last_name) ILIKE '".$arr["ln"]."%')";
 	  }

@@ -477,7 +477,7 @@ class DOCMGR
 					$info = $this->DB->fetch($sql);
 
 					//we can see all of them, good to go
-					if ($info["count"]==count($arr))
+					if ($info["count"]==count((array) $arr))
 					{
 						$ret = $path;
 						break;
@@ -555,7 +555,7 @@ class DOCMGR
 			//algorithm isn't perfect, it returns dups, and the ids are backwards
 			$path = array_values(array_unique($ret));
 
-			for ($i=0;$i<count($path);$i++)
+			for ($i=0;$i<count((array) $path);$i++)
 			{
 				$arr = explode(",",$path[$i]);
 				
@@ -640,7 +640,7 @@ class DOCMGR
 		$str = $id;
 		$ret = array();
 
-		if (count($list["object_id"]) > 0)
+		if (count((array) $list["object_id"]) > 0)
 		{
 		
 			$keys = array_keys($list["object_id"],$id);

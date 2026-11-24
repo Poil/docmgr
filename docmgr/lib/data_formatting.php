@@ -314,7 +314,7 @@ function organizeName($str) {
    
         $str = str_replace(",","",$str);
         $arr = explode(" ",$str);
-        $num = count($arr);
+        $num = count((array) $arr);
 
         if ($num > 2) {
             $ret["ln"] = $arr[0];
@@ -330,7 +330,7 @@ function organizeName($str) {
     else {
 
         $arr = explode(" ",$str);
-        $num = count($arr);
+        $num = count((array) $arr);
 
         if ($num==1) {
             $ret["ln"] = $arr[0];

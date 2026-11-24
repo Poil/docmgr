@@ -333,7 +333,7 @@ class PERM
     //now loop through all our bitmask values, and combine them to create our users bitmask
     if ($groupInfo) $permArr = $groupInfo["bitmask"];
 
-    for ($row=0;$row<count($permArr);$row++)
+    for ($row=0;$row<count((array) $permArr);$row++)
     {
 
       //if these are not the same number, set bits present in either

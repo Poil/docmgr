@@ -133,7 +133,7 @@ class XML {
 	function convertToXml($arr,$passKey = null) {
 
 		//make sure there's something there
-		if (count($arr)==0) return false;
+		if (count((array) $arr)==0) return false;
 		if (!is_array($arr)) return false;
 	
 		$keys = array_keys($arr);
@@ -195,7 +195,7 @@ class XML {
 	function convertTable($data) {
 
 		$keys = array_keys($data);
-		$num = count($keys);
+		$num = count((array) $keys);
 		$str = null;
 
 		//get all fields and convert data to xml

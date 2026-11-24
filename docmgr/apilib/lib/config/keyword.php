@@ -128,7 +128,7 @@ class CONFIG_KEYWORD extends CONFIG
 		$parents = $this->apidata["parent_id"];
 		if ($parents && !is_array($parents)) $parents = array($parents);
 		
-		for ($i=0;$i<count($parents);$i++) 
+		for ($i=0;$i<count((array) $parents);$i++) 
 		{
     	$sql .= "INSERT INTO docmgr.keyword_collection (keyword_id,parent_id) VALUES ('".$this->keywordId."','".$parents[$i]."');";
 		}
@@ -184,7 +184,7 @@ class CONFIG_KEYWORD extends CONFIG
 		
   	$sql = null;
   
-  	for ($i=0;$i<count($optionId);$i++) 
+  	for ($i=0;$i<count((array) $optionId);$i++) 
   	{
 	    $sql .= "DELETE FROM docmgr.keyword_option WHERE id='".$optionId[$i]."';";
 		}

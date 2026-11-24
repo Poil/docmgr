@@ -85,7 +85,7 @@ class TEMPLATE {
       return false;
     }
     
-    if (count($this->template)==0)
+    if (count((array) $this->template)==0)
     {
       $this->throwError("Error!  No sections found in setup file");
       return false;
@@ -207,7 +207,7 @@ class TEMPLATE {
 
           //this happens if it's a new parameter for the newer version, not going
           //to be in the older one
-          if (count($arr)==0) continue;
+          if (count((array) $arr)==0) continue;
 
           //disable if disabled in the config file
           if ($arr["enabled"]==false) $section[$form][1] = false;

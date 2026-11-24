@@ -175,7 +175,7 @@ class AUTH
 		//get our cookie info	
 		$info = explode(":",$_COOKIE["authentication"]);
 
-		if (count($info)!=2) return false;
+		if (count((array) $info)!=2) return false;
 
 		$sql = "SELECT account_id FROM auth.cookies WHERE key='".$info[0]."' AND uuid='".$info[1]."' AND expires>'".time()."'";
 		$results = $this->DB->single($sql);

@@ -111,7 +111,7 @@ function createDropdown($optionArray) {
 
 	if ($nullValue) $string .= "<option value=\"0\">".$nullValue;
 
-	for ($row=0;$row<count($ddInfo[$fieldName]);$row++) {
+	for ($row=0;$row<count((array) $ddInfo[$fieldName]);$row++) {
 
 		if ($value==$ddInfo[$fieldValue][$row]) $selected = " SELECTED ";
 		else $selected = null;
@@ -156,7 +156,7 @@ function dropdownGenerate($formInfo) {
 
 	$content .= ">";
 
-	for ($row=0;$row<count($formInfo["extraId"]);$row++) {
+	for ($row=0;$row<count((array) $formInfo["extraId"]);$row++) {
 	
 		if ($formInfo["cur_value"]==$formInfo["extraId"][$row]) $selected = " SELECTED ";
 		else $selected = null;
@@ -165,7 +165,7 @@ function dropdownGenerate($formInfo) {
 
 	}
 
-	for ($row=0;$row<count($list["id"]);$row++) {
+	for ($row=0;$row<count((array) $list["id"]);$row++) {
 
 		if ($formInfo["cur_value"]==$list["id"][$row]) $selected = " SELECTED ";
 		else $selected = null;
@@ -541,7 +541,7 @@ function functionMenu($tableName,$nameList,$functionList) {
             style=\"visibility:hidden;position:absolute\" 
             class=\"functionMenu\">  ";
 
-    for ($row=0;$row<count($nameList);$row++) {
+    for ($row=0;$row<count((array) $nameList);$row++) {
 
         $id = $tableName."Cell".$row;
 
@@ -572,7 +572,7 @@ function createPermCheckbox($bitValue) {
 
   $permArray = $_SESSION["definePermArray"];
 
-  for ($row=0;$row<count($permArray["name"]);$row++) {
+  for ($row=0;$row<count((array) $permArray["name"]);$row++) {
 
     $bitSet = bitCal($permArray["bitpos"][$row]);
 

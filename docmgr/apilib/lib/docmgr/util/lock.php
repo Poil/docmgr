@@ -71,7 +71,7 @@ class DOCMGR_UTIL_LOCK
 	    	$d = new DOCMGR_OBJECT();
 	    	$arr = $d->getChildObjects($obj);    
 
-	    	if (count($arr) > 0) $children = array_merge($children,$arr);
+	    	if (count((array) $arr) > 0) $children = array_merge($children,$arr);
 
 			}
 
@@ -359,7 +359,7 @@ class DOCMGR_UTIL_LOCK
 
 		unset($list["count"]);
 
-		if (count($list) > 0)
+		if (count((array) $list) > 0)
 		{
 
 			unset($list["count"]);
@@ -370,7 +370,7 @@ class DOCMGR_UTIL_LOCK
 			
 				$keys = array_keys($list["object_id"],$objarr[$i]["id"]);
 				
-				if (count($keys) > 0)
+				if (count((array) $keys) > 0)
 				{
 	
 					$key = $keys[0];

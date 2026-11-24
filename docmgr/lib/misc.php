@@ -148,7 +148,7 @@ function returnAccountList($opt) {
   $a = new ACCOUNT();
   $ret = $a->getList($filter,$sort);
   
-  $num = count($ret);
+  $num = count((array) $ret);
 
   if ($ret["count"] > 0)
   {
@@ -171,7 +171,7 @@ function validMethod($class,$method)
 
   //make sure the method is public
   $valids = get_class_methods($class);
-  $num = count($valids);
+  $num = count((array) $valids);
 
   for ($i=0;$i<$num;$i++) $valids[$i] = strtolower($valids[$i]);
 
@@ -256,7 +256,7 @@ function cacheJSFiles($path)
     $filename = array_pop(explode("/",$js));
     $ignore = false;
 
-    for ($i=0;$i<count($skip);$i++)
+    for ($i=0;$i<count((array) $skip);$i++)
     {
       if (strstr($js,$skip[$i]))
       {
@@ -328,7 +328,7 @@ function cacheCSSFiles($path)
     $filename = array_pop(explode("/",$css));
     $ignore = false;
 
-    for ($i=0;$i<count($skip);$i++)
+    for ($i=0;$i<count((array) $skip);$i++)
     {
       if (strstr($css,$skip[$i]))
       {

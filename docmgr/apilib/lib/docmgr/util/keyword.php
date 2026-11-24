@@ -91,7 +91,7 @@ class DOCMGR_UTIL_KEYWORD
 					$arr = array();
 					$arr["id"] = "[[docmgr_noentry]]";
 					$arr["name"] = "Select...";
-					$list[$i]["option"][count($list[$i]["option"])] = $arr;
+					$list[$i]["option"][count((array) $list[$i]["option"])] = $arr;
 
 				}
 				
@@ -104,7 +104,7 @@ class DOCMGR_UTIL_KEYWORD
 					$arr = array();
 					$arr["id"] = "[[docmgr_noentry]]";
 					$arr["name"] = "Select...";
-					$list[$i]["option"][count($list[$i]["option"])] = $options[$c];
+					$list[$i]["option"][count((array) $list[$i]["option"])] = $options[$c];
 				
 				}
 				

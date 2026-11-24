@@ -98,7 +98,7 @@ class DOCMGR_UTIL_COMMON
 			$pidarr = DOCMGR_UTIL_COMMON::objectIdAllPaths($objId);
 			$parr = explode(",",$pids);
 
-			for ($i=0;$i<count($pidarr);$i++)
+			for ($i=0;$i<count((array) $pidarr);$i++)
 			{
 
 				$temp = explode(",",$pidarr[$i]);
@@ -146,7 +146,7 @@ class DOCMGR_UTIL_COMMON
 		array_shift($arr);				//remove the blank empty directory
 		$path = "/";	
 
-		if (count($arr)==0) return false;
+		if (count((array) $arr)==0) return false;
 
 		foreach ($arr AS $name) 
 		{
@@ -245,7 +245,7 @@ class DOCMGR_UTIL_COMMON
 	
 			$paths = DOCMGR_UTIL_COMMON::objectIdAllPaths($obj);
 
-			if (count($paths)==0) continue;
+			if (count((array) $paths)==0) continue;
 			
 			foreach ($paths AS $path)
 			{
@@ -257,7 +257,7 @@ class DOCMGR_UTIL_COMMON
 				//$arr = array_reverse(explode(",",$path));
 				$arr = explode(",",$path);
 				
-				if (count($arr)==0) continue;
+				if (count((array) $arr)==0) continue;
 				
 				//figure out which one are collections
 				$sql = "SELECT id FROM docmgr.dm_object WHERE id in (".$path.") AND object_type='collection'";
@@ -267,7 +267,7 @@ class DOCMGR_UTIL_COMMON
 
 				$arr = array_values(array_intersect($arr,$list["id"]));
 				
-				for ($i=0;$i<count($arr);$i++)
+				for ($i=0;$i<count((array) $arr);$i++)
 				{
 				
 					$sql = "UPDATE docmgr.dm_object SET size=

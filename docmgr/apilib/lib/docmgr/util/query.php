@@ -37,7 +37,7 @@ class DOCMGR_UTIL_QUERY
 		/***********************************************************
 			process our search filters
 		***********************************************************/
-		for ($i=0;$i<count($filter);$i++)
+		for ($i=0;$i<count((array) $filter);$i++)
 		{
 	
 			//passed a keyword filter
@@ -330,14 +330,14 @@ class DOCMGR_UTIL_QUERY
 	
 		extract($opt);
 	
-		if (!$search_option || count($search_option)==0) $search_option = array("name","summary","content");
+		if (!$search_option || count((array) $search_option)==0) $search_option = array("name","summary","content");
 	
 		//create our criteria for the query
 		$criteria = null;
 		$this->sqlRank = null;
 	
 		//setup lexem
-		if (count($search_option)==3) $lexeme = "@@";
+		if (count((array) $search_option)==3) $lexeme = "@@";
 		else $lexeme = "@@@";
 	
 		/********************************************************************************
@@ -417,7 +417,7 @@ class DOCMGR_UTIL_QUERY
 	
 		$ret = false;
 		$arr = explode(" ",trim($str));
-		$num = count($arr);
+		$num = count((array) $arr);
 		
 		for ($i=0;$i<$num;$i++)
 		{
@@ -460,14 +460,14 @@ class DOCMGR_UTIL_QUERY
 		if (!strlen($wordString)) return false;
 	
 		//if file_name,summary, or content are checked, this appends weights to the end of our strings
-		if (count($option)<3) 
+		if (count((array) $option)<3) 
 		{
 	
-			$num = count($option);
+			$num = count((array) $option);
 			
 			//$arr = explode(" ",trim(ereg_replace("[^".REGEXP_OPTION." ]","",$string)));
 			$arr = explode(" ",$saveString);
-			$lnum = count($arr);
+			$lnum = count((array) $arr);
 			$skip = array("and","or","not");
 	
 			//loop through our search options to add the weight filters
@@ -564,7 +564,7 @@ class DOCMGR_UTIL_QUERY
 	
 		$st = 1;
 		$join = null;
-		$num = count($arr);
+		$num = count((array) $arr);
 		
 		for ($i=0;$i<$num;$i++)
 		{
@@ -807,8 +807,8 @@ class DOCMGR_UTIL_QUERY
 		for ($i=0;$i<$this->results["count"];$i++) 
 		{
 			$keys = array_keys($discArr["object_id"],$this->results[$i]["id"]);
-			if ($keys) $num = count($keys);
-			if ($num > 0) $this->results[$i]["discussion"] = count($keys);
+			if ($keys) $num = count((array) $keys);
+			if ($num > 0) $this->results[$i]["discussion"] = count((array) $keys);
 		}
 	
 	}
@@ -901,7 +901,7 @@ class DOCMGR_UTIL_QUERY
 		if (!is_array($value)) $value = explode(",",$value);
 
 		//merge all selected collections and their children into one array
-		$num = count($value);
+		$num = count((array) $value);
 		$cv = $value;
 			
 		for ($i=0;$i<$num;$i++) 

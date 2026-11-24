@@ -37,7 +37,7 @@ class EFORM_FILTERS extends EFORM
 		$filters = $arr["filter"];
 		
 		//bail if nothing found
-		if (count($filters)==0)
+		if (count((array) $filters)==0)
 		{
 			$this->throwError("No filters defined");
 			return false;
@@ -95,7 +95,7 @@ class EFORM_FILTERS extends EFORM
 		  //split the api into it's parts
 		  $tmp = explode("_",$api_command);
 
-		  if (count($tmp)!=3) 
+		  if (count((array) $tmp)!=3) 
 		  {
 		  	$this->throwError("API command must have 3 segments");
 		  	return false;
@@ -110,7 +110,7 @@ class EFORM_FILTERS extends EFORM
 		  $list = $API->$api_method();
 		  unset($list["count"]);
 		  
-		  $num = count($list);
+		  $num = count((array) $list);
 		  
 		  for ($i=0;$i<$num;$i++)
 		  {

@@ -47,7 +47,7 @@ function processPHP($newFile,$oldFile)
 
   $diff = array_values(array_diff($newVars,$oldVars));
   
-  for ($i=0;$i<count($diff);$i++)
+  for ($i=0;$i<count((array) $diff);$i++)
   {
     echo "New Variable => ".$diff[$i]."\n";
   }
@@ -62,7 +62,7 @@ function processJS($newFile,$oldFile)
   
   $diff = array_values(array_diff($newVars,$oldVars));
   
-  for ($i=0;$i<count($diff);$i++)
+  for ($i=0;$i<count((array) $diff);$i++)
   {
     echo "New Variable => ".$diff[$i]."\n";
   }

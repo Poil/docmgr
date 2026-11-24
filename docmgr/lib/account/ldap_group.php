@@ -64,7 +64,7 @@ class LDAP_GROUP
 
 		$res = $this->search("(cn=".$name.")");
 		
-		if (count($res)==0) return false;
+		if (count((array) $res)==0) return false;
 		else 
 		{
 			$this->groupId = $res[0]["id"];
@@ -108,7 +108,7 @@ class LDAP_GROUP
 			$arr[$c]["samba_sid"] = $info["sambasid"][0];
 		
 			//populate our member list	
-			$num = count($info["memberuid"]);
+			$num = count((array) $info["memberuid"]);
 			$arr[$c]["member_uid"] = array();
 			
 			for ($i=0;$i<$num;$i++) 

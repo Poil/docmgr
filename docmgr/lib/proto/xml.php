@@ -43,7 +43,7 @@ class XML
 	{
 
 		//make sure there's something there
-		if (count($arr)==0) return false;
+		if (count((array) $arr)==0) return false;
 		if (!is_array($arr)) return false;
 		
 		$keys = array_keys($arr);

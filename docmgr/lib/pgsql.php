@@ -372,7 +372,7 @@ CLASS POSTGRESQL
 			
 		}
 
-		if (count($fieldArr) > 0 && count($valueArr) > 0) {
+		if (count((array) $fieldArr) > 0 && count((array) $valueArr) > 0) {
 		
 			$fieldString = implode(",",$fieldArr);
 			$valueString = implode(",",$valueArr);

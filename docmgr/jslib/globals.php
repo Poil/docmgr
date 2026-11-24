@@ -37,7 +37,7 @@ if (defined("USE_LDAP")) echo "var USE_LDAP = \"".USE_LDAP."\"\n";
 $str = file_get_contents("config/permissions.xml");
 $arr = xml2array($str);
   
-for ($i=0;$i<count($arr["perm"]);$i++) 
+for ($i=0;$i<count((array) $arr["perm"]);$i++) 
 {
   echo "var ".$arr["perm"][$i]["define_name"]." = \"".$arr["perm"][$i]["bitpos"]."\";\n";
 }

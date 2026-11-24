@@ -86,7 +86,7 @@ class EMAIL_SEND extends EMAIL
 	  $n = 0;
 	  $matcharr = $matches[1];
 	    
-	  for ($i=0;$i<count($matcharr);$i++) 
+	  for ($i=0;$i<count((array) $matcharr);$i++) 
 	  {
 	
 	    //skip regular links
@@ -122,11 +122,11 @@ class EMAIL_SEND extends EMAIL
 	  //first we need to pull all images and objects from this email
 	  $imgarr = $this->getEmailImages($msg);
 	
-	  if (count($imgarr)==0) return false;
+	  if (count((array) $imgarr)==0) return false;
 	
 	  //our directory for storing the attachments
 	  $dir = TMP_DIR."/".USER_LOGIN."/email";
-	  $c = count($attach);
+	  $c = count((array) $attach);
 	    
 	  foreach ($imgarr AS $img) 
 	  {
@@ -168,7 +168,7 @@ class EMAIL_SEND extends EMAIL
 	
 	  //loop through and get our files
 	  $docarr = $this->apidata["docmgr_attach"];
-	  $c = count($attach);
+	  $c = count((array) $attach);
 
 	  foreach ($docarr AS $docId) 
 	  {
@@ -201,7 +201,7 @@ class EMAIL_SEND extends EMAIL
 	protected function checkAttached($attach,$path) 
 	{
 	
-	  $num = count($attach);
+	  $num = count((array) $attach);
 	  $ret = true;
 	  
 	  for ($i=0;$i<$num;$i++) {

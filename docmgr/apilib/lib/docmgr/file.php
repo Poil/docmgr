@@ -67,7 +67,7 @@ class DOCMGR_FILE extends DOCMGR_AOBJECT
 		//messages as anything but XML
 		$this->PROTO->setProtocol("XML");
 
-		for ($i=0;$i<count($pathArr);$i++) 
+		for ($i=0;$i<count((array) $pathArr);$i++) 
 		{
 
 			//preset our data values and go      
@@ -102,7 +102,7 @@ class DOCMGR_FILE extends DOCMGR_AOBJECT
 	  }
 
 		$arr = scandir($this->apidata["directory"]);
-		$num = count($arr);
+		$num = count((array) $arr);
 		
 		for ($i=0;$i<$num;$i++)
 		{
@@ -788,7 +788,7 @@ class DOCMGR_FILE extends DOCMGR_AOBJECT
 		//create a new array with the swapped orders
 		$temp = array($fileId);
 		foreach ($info["id"] AS $id) if ($id!=$fileId) $temp[] = $id;
-		$num = count($temp);
+		$num = count((array) $temp);
 	
 		for ($row=0;$row<$num;$row++) 
 		{
