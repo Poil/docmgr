@@ -4,7 +4,7 @@
 define("DB_VERSION","2013050101");
 
 //for our javascript/css caching
-define("JS_VERSION","2013060901");
+define("JS_VERSION","2026112401");
 
 //current app version.  we use dates instead of major/minor numbers
 //because it's easier for upgrade checking

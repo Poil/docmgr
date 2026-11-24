@@ -38,6 +38,8 @@ Tested with **PHP 8.5** (PHP-FPM) and **PostgreSQL 18** on Ubuntu 26.04.
 - Upgraded the bundled PHPMailer from 5.2.2 (2012, known CVEs including CVE-2016-10033) to **7.2.0**. Only `src/` and `LICENSE` are kept in `lib/phpmailer/`. `lib/sendemail.php` was adapted: namespaced classes, `getSentMIMEMessage()` instead of the now-protected `MIMEHeader`/`MIMEBody`, UTF-8 charset, and no undefined `$name`/`cid` warnings.
 - Upgraded CKEditor from 4.1.1 (2013) to **4.22.1**, the last open-source CKEditor 4 release, which includes about 10 years of XSS fixes. Kept docmgr's `config.js` (toolbars, `CustomImage` dialog) and `stylesheet.css`, dropped `samples/`, and set `versionCheck = false` to disable the end-of-life banner.
 - Removed unused demo/test code: `sabredav/{examples,docs,tests,fileserver.php}`, `jslib/datepicker/Test`.
+- `count()` on `null` is a fatal `TypeError` since PHP 8 (for example, "add filter" in search returned HTTP 500). Every `count()` on a variable in docmgr's code now uses `count((array) $x)`, which keeps the PHP 7 result (`null` → 0). The two `SimpleXMLElement` counts in `lib/xml.php` and `lib/libxml.php` are unchanged.
+- Bumped `JS_VERSION` in `config/version.php` so browsers reload the upgraded JavaScript instead of the cached 2013 copies.
 
 ## Installation notes
 
@@ -49,6 +51,7 @@ Tested with **PHP 8.5** (PHP-FPM) and **PostgreSQL 18** on Ubuntu 26.04.
   ```
 - Apache: send `*.php` to PHP-FPM (`SetHandler "proxy:unix:/run/php/phpX.Y-fpm.sock|fcgi://localhost"`). Update the socket path after each PHP upgrade.
 - PHP extensions: `pgsql`, `mbstring`, `gd`, `xml`, `zip`, `imagick`.
+- After changing any JavaScript or CSS (including a CKEditor upgrade), bump `JS_VERSION` in `docmgr/config/version.php`. It is the `?v=` cache-busting parameter on every script and stylesheet, so without a bump browsers keep serving stale files.
 
 To check compatibility after a PHP upgrade, lint every file. PHP reports compile-time deprecations only once per file, so the error log alone misses most of them:
 
@@ -58,6 +61,7 @@ find docmgr -name '*.php' -print0 | xargs -0 -I{} php -d error_reporting=-1 -l {
 
 ## Known issues
 
+- Other PHP 8 `TypeError`s may remain on screens not tested yet: built-in array functions (`in_array`, `array_keys`, `implode`, …) called with `null`. The lint does not find these, so they only appear as HTTP 500 errors when a screen is used; check the PHP error log.
 - WebDAV (bundled SabreDAV 1.8.1, 2013) is unmaintained and unused. Upgrading means a rewrite for SabreDAV 4, so block it in Apache instead:
   ```apache
   <Location /sabredav>
