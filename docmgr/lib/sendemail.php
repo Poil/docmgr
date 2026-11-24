@@ -1,7 +1,12 @@
 <?php
 //$this->MIMEHeader, $this->MIMEBody;
 
-require_once(SITE_PATH."/lib/phpmailer/class.phpmailer.php");
+require_once(SITE_PATH."/lib/phpmailer/src/Exception.php");
+require_once(SITE_PATH."/lib/phpmailer/src/PHPMailer.php");
+require_once(SITE_PATH."/lib/phpmailer/src/SMTP.php");
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception as PHPMailerException;
 
 /**********************************************************************
 	FILENAME:	email.php
@@ -28,6 +33,7 @@ class SENDEMAIL
 
 		$this->mailer = new PHPMailer(true);
 		$this->mailer->IsSMTP(); // telling the class to use SMTP
+		$this->mailer->CharSet = PHPMailer::CHARSET_UTF8;
 
 		if ($to) 			$this->setTo($to);
 		if ($from) 		$this->setFrom($from);
@@ -89,7 +95,7 @@ class SENDEMAIL
 			}			
 
 		} 
-		catch (phpmailerException $e) 
+		catch (PHPMailerException $e) 
 		{
 			$this->throwError($e->errorMessage()); //Pretty error messages from PHPMailer
 		} 
@@ -122,7 +128,7 @@ class SENDEMAIL
 			}			
 
 		} 
-		catch (phpmailerException $e) 
+		catch (PHPMailerException $e) 
 		{
 			$this->throwError($e->errorMessage()); //Pretty error messages from PHPMailer
 		} 
@@ -155,7 +161,7 @@ class SENDEMAIL
 			}			
 
 		} 
-		catch (phpmailerException $e) 
+		catch (PHPMailerException $e) 
 		{
 			$this->throwError($e->errorMessage()); //Pretty error messages from PHPMailer
 		} 
@@ -177,7 +183,7 @@ class SENDEMAIL
 			$arr = $this->setupEmail($str);
 			$this->mailer->SetFrom($arr[0],$arr[1]);
 		} 
-		catch (phpmailerException $e) 
+		catch (PHPMailerException $e) 
 		{
 			$this->throwError($e->errorMessage()); //Pretty error messages from PHPMailer
 		} 
@@ -206,6 +212,7 @@ class SENDEMAIL
 		$arr = explode(" ",$str);
 		
 		$email = array_pop($arr);
+		$name = "";
 		
 		if (count($arr) > 0) $name = implode(" ",$arr);
 		
@@ -227,7 +234,7 @@ class SENDEMAIL
 		
 		foreach ($arr AS $attach)
 		{
-			if ($attach["cid"])
+			if (!empty($attach["cid"]))
 			{
 				$type = return_file_mime(basename($attach["path"]));
 				$this->mailer->AddEmbeddedImage($attach["path"], $attach["cid"]);
@@ -248,9 +255,9 @@ class SENDEMAIL
 	function getContent()
 	{
 		//hasn't been sent yet
-		if (!$this->mailer->MIMEHeader) $this->mailer->PreSend();
-		
-		return $this->mailer->MIMEHeader.$this->mailer->MIMEBody;	
+		if (!$this->mailer->getSentMIMEMessage()) $this->mailer->preSend();
+
+		return $this->mailer->getSentMIMEMessage();	
 
 	}
 
@@ -263,7 +270,7 @@ class SENDEMAIL
 			$this->setup();
 			$this->mailer->Send();
 		} 
-		catch (phpmailerException $e) 
+		catch (PHPMailerException $e) 
 		{
 			$this->throwError($e->errorMessage()); //Pretty error messages from PHPMailer
 		} 
