@@ -43,6 +43,7 @@ Tested with **PHP 8.5** (PHP-FPM) and **PostgreSQL 18** on Ubuntu 26.04.
 - `bin/docmgr-indexer.php`: `debugMsg()` read the undefined `DEBUG` constant, a fatal error since PHP 8, so the indexer died on its first message. Full-text indexing and thumbnails had silently stopped, and uploads just piled up in `docmgr.dm_index_queue`.
 - `apilib/lib/docmgr/objindex.php`: `removeTags()` and `clean()` are called statically from other classes (`DOCMGR_UTIL_FILEINDEX`, `DOCMGR_DOCUMENT`, `DOCMGR_URL`), which is a fatal error since PHP 8. The indexer died on the first `.doc`/OpenOffice file. Both are now `static`. A dead `$cleanTags` branch in `clean()` (an undefined variable, never true) was removed.
 - `app/openoffice.php`: when the office-document conversion produces no file, `ZipArchive::open('')` throws a `ValueError` in PHP 8, which killed the indexer. It now returns no content, so the document is indexed by name only.
+- `EXECUTION_TIME` (60 s) was also applied to the command-line indexer, so one long OCR job on a scanned PDF killed the whole indexing run. The limit now applies to web requests only (`apilib/lib/docmgr/lib/setup.php`, `util/fileindex.php`).
 
 ## Installation notes
 

@@ -110,7 +110,7 @@ class DOCMGR_UTIL_FILEINDEX
 				$pnmArray = array();
 	
 				$timeout = EXECUTION_TIME * $numpages;
-				ini_set("max_execution_time","$timeout");    //putting this here is an experiment
+				if (PHP_SAPI !== "cli") ini_set("max_execution_time","$timeout");    //putting this here is an experiment
 	
 				system(APP_MOGRIFY." -format pnm ".$dirPrefix."*.tif");
 	
