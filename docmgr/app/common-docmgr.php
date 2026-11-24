@@ -120,28 +120,28 @@ function setExternalApps() {
 	}
 
 	//url download support
-	if ($_SESSION["api"]["setApps"]["wget"]) define("URL_SUPPORT","1");
+	if (!empty($_SESSION["api"]["setApps"]["wget"])) define("URL_SUPPORT","1");
 
 	//zip archive support
-	if ($_SESSION["api"]["setApps"]["zip"]) define("ZIP_SUPPORT","1");
+	if (!empty($_SESSION["api"]["setApps"]["zip"])) define("ZIP_SUPPORT","1");
 
 	//ocr support
-	if (($_SESSION["api"]["setApps"]["ocr"] && 
-	  $_SESSION["api"]["setApps"]["libtiff"] && 
-	  $_SESSION["api"]["setApps"]["imagemagick"])) define("OCR_SUPPORT","1");
+	if ((!empty($_SESSION["api"]["setApps"]["ocr"]) && 
+	  !empty($_SESSION["api"]["setApps"]["libtiff"]) && 
+	  !empty($_SESSION["api"]["setApps"]["imagemagick"]))) define("OCR_SUPPORT","1");
 
-  if ($_SESSION["api"]["setApps"]["xpdf"]) define("PDF_SUPPORT","1");
+  if (!empty($_SESSION["api"]["setApps"]["xpdf"])) define("PDF_SUPPORT","1");
 
 	//thumbnail support
-	if ($_SESSION["api"]["setApps"]["imagemagick"]) define("THUMB_SUPPORT","1");
+	if (!empty($_SESSION["api"]["setApps"]["imagemagick"])) define("THUMB_SUPPORT","1");
 
 	//tiff handling support
-	if ($_SESSION["api"]["setApps"]["libtiff"]) define("TIFF_SUPPORT","1");
+	if (!empty($_SESSION["api"]["setApps"]["libtiff"])) define("TIFF_SUPPORT","1");
 	
 	//antivirus support
-	if ($_SESSION["api"]["setApps"]["clamav"]) define("CLAMAV_SUPPORT","1");
+	if (!empty($_SESSION["api"]["setApps"]["clamav"])) define("CLAMAV_SUPPORT","1");
 
-	if (!array_key_exists("email", $_SESSION["api"]["setApps"])) define("EMAIL_SUPPORT","1");
+	if (!empty($_SESSION["api"]["setApps"]["email"])) define("EMAIL_SUPPORT","1");
 
 	return true;
 	
