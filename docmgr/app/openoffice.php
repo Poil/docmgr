@@ -95,8 +95,8 @@ class OPENOFFICE
   *************************************************************/
   function getFileContents() {
   
-    //unzip it
-    $this->zip->open($this->ooFile);
+    //unzip it (no file when the office conversion failed: return no content)
+    if (!$this->ooFile || $this->zip->open($this->ooFile) !== true) return "";
     $data = $this->zip->getFromName("content.xml");
     $this->zip->close();          
   
@@ -113,7 +113,7 @@ class OPENOFFICE
     if (!$data) $data = $this->prefix.$this->content.$this->suffix;
 
     //update the archive with the new contents
-    $this->zip->open($this->ooFile);
+    if (!$this->ooFile || $this->zip->open($this->ooFile) !== true) return false;
     $data = $this->zip->addFromString("content.xml",$data);
     $this->zip->close();          
 

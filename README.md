@@ -42,6 +42,7 @@ Tested with **PHP 8.5** (PHP-FPM) and **PostgreSQL 18** on Ubuntu 26.04.
 - Bumped `JS_VERSION` in `config/version.php` so browsers reload the upgraded JavaScript instead of the cached 2013 copies.
 - `bin/docmgr-indexer.php`: `debugMsg()` read the undefined `DEBUG` constant, a fatal error since PHP 8, so the indexer died on its first message. Full-text indexing and thumbnails had silently stopped, and uploads just piled up in `docmgr.dm_index_queue`.
 - `apilib/lib/docmgr/objindex.php`: `removeTags()` and `clean()` are called statically from other classes (`DOCMGR_UTIL_FILEINDEX`, `DOCMGR_DOCUMENT`, `DOCMGR_URL`), which is a fatal error since PHP 8. The indexer died on the first `.doc`/OpenOffice file. Both are now `static`. A dead `$cleanTags` branch in `clean()` (an undefined variable, never true) was removed.
+- `app/openoffice.php`: when the office-document conversion produces no file, `ZipArchive::open('')` throws a `ValueError` in PHP 8, which killed the indexer. It now returns no content, so the document is indexed by name only.
 
 ## Installation notes
 
@@ -73,6 +74,7 @@ find docmgr -name '*.php' -print0 | xargs -0 -I{} php -d error_reporting=-1 -l {
 
 ## Known issues
 
+- Full-text indexing of `.doc`/`.xls`/`.ppt` files does not work: the bundled `bin/DocumentConverter.py` (Python UNO converter) fails on current LibreOffice. These files are indexed by name only. A fix would be converting with `soffice --headless --convert-to odt` instead.
 - Other PHP 8 `TypeError`s may remain on screens not tested yet: built-in array functions (`in_array`, `array_keys`, `implode`, …) called with `null`. The lint does not find these, so they only appear as HTTP 500 errors when a screen is used; check the PHP error log.
 - WebDAV (bundled SabreDAV 1.8.1, 2013) is unmaintained and unused. Upgrading means a rewrite for SabreDAV 4, so block it in Apache instead:
   ```apache
