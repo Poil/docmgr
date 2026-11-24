@@ -35,6 +35,9 @@ Tested with **PHP 8.5** (PHP-FPM) and **PostgreSQL 18** on Ubuntu 26.04.
 - Declared the `CONFIG::$CDB` property (dynamic properties are deprecated) and stopped passing `null` to `strip_tags()`/`json_decode()`.
 - sabredav: `continue` inside a `switch` became `break` (same behaviour); removed `final` from a private method.
 - `app/common-docmgr.php`: fixed the reversed `EMAIL_SUPPORT` check from the 2024 commit (it was turned on when email was *not* detected); external-app checks now use `!empty()`, which removes the `Undefined array key "imagemagick"` warnings.
+- Upgraded the bundled PHPMailer from 5.2.2 (2012, known CVEs including CVE-2016-10033) to **7.2.0**. Only `src/` and `LICENSE` are kept in `lib/phpmailer/`. `lib/sendemail.php` was adapted: namespaced classes, `getSentMIMEMessage()` instead of the now-protected `MIMEHeader`/`MIMEBody`, UTF-8 charset, and no undefined `$name`/`cid` warnings.
+- Upgraded CKEditor from 4.1.1 (2013) to **4.22.1**, the last open-source CKEditor 4 release, which includes about 10 years of XSS fixes. Kept docmgr's `config.js` (toolbars, `CustomImage` dialog) and `stylesheet.css`, dropped `samples/`, and set `versionCheck = false` to disable the end-of-life banner.
+- Removed unused demo/test code: `sabredav/{examples,docs,tests,fileserver.php}`, `jslib/datepicker/Test`.
 
 ## Installation notes
 
@@ -55,5 +58,11 @@ find docmgr -name '*.php' -print0 | xargs -0 -I{} php -d error_reporting=-1 -l {
 
 ## Known issues
 
+- WebDAV (bundled SabreDAV 1.8.1, 2013) is unmaintained and unused. Upgrading means a rewrite for SabreDAV 4, so block it in Apache instead:
+  ```apache
+  <Location /sabredav>
+      Require all denied
+  </Location>
+  ```
+- MooTools 1.4.5 (the UI framework) is outdated, but the project is dead and has no notable security issues, so it is left as is.
 - Many `Undefined array key` warnings remain in `lib/arrays.php` and `lib/xml.php`. They clutter the log but don't break anything.
-- `lib/phpmailer/extras/htmlfilter.php` and `lib/phpmailer/test_script/index.php` don't parse on modern PHP. The application doesn't use them.
