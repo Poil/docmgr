@@ -85,7 +85,7 @@ class APP
         $python = $app."/program/python";
 
         //now see if we can find it
-        $output = `which $python`;
+        $output = shell_exec("which $python");
         $output = trim($output);
 
         if (!$output)
@@ -98,7 +98,7 @@ class APP
       {
 
         //now see if we can find it
-        $output = `which $app`;
+        $output = shell_exec("which $app");
         $output = trim($output);
 
         if (!$output && isset($arr[4]) && $arr[4]==true)

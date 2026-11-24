@@ -59,7 +59,7 @@ class Request {
      * @param array $serverData
      * @param array $postData
      */
-    public function __construct(array $serverData = null, array $postData = null) {
+    public function __construct(?array $serverData = null, ?array $postData = null) {
 
        if ($serverData) $this->_SERVER = $serverData;
        else $this->_SERVER =& $_SERVER;

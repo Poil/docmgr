@@ -41,6 +41,6 @@ else
 $cmd = APP_PYTHON." bin/DocumentConverter.py \"".$argv[1]."\" \"".$argv[2]."\"";
 
 //run it
-$res = `$cmd`;
+$res = shell_exec("$cmd");
 
 echo $res;

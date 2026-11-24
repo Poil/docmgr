@@ -43,7 +43,7 @@ class DOCMGR_UTIL_FILEINDEX
 
 			//remove temp directory
 			$cmd = "rm -r ".$worker;
-			`$cmd`;
+			shell_exec("$cmd");
 			
 		//the old way	
 		} 
@@ -85,7 +85,7 @@ class DOCMGR_UTIL_FILEINDEX
 
 			//find out if multipage, use tiffinfo
 			$app = APP_TIFFINFO;
-			$numpages = `$app "$filepath"`;
+			$numpages = shell_exec("$app \"$filepath\"");
 			$numpages=substr_count($numpages,"TIFF Directory");
 	
 			$dir = substr($filepath,0,strrpos($filepath,"/") + 1);
@@ -216,7 +216,7 @@ class DOCMGR_UTIL_FILEINDEX
 
 		//get any text that we can
 		$pdftotext = APP_PDFTOTEXT;
-		$newstring = `$pdftotext "$filepath" - 2>/dev/null`;
+		$newstring = shell_exec("$pdftotext \"$filepath\" - 2>/dev/null");
 
 		//if we have disabled encapsulated pdf support, or have no ocr support, return here
 		if (defined("DISABLE_ENCAP_OCR") || !defined("OCR_SUPPORT")) return $newstring;
@@ -260,7 +260,7 @@ class DOCMGR_UTIL_FILEINDEX
 		{
 	
 			$cmd = APP_OCR." \"".$files[$i]."\"";
-			$str .= `$cmd`;
+			$str .= shell_exec("$cmd");
 			$str .= " ";
 			
 		}

@@ -142,7 +142,7 @@ class DOCMGR_UTIL_FILETHUMB
 	
 		//find out if multipage, use tiffinfo
 		$app = APP_TIFFINFO;
-		$numpages=`$app "$this->filepath"`;
+		$numpages=shell_exec("$app \"$this->filepath\"");
 		$numpages=substr_count($numpages,"TIFF Directory");
 
 		$dim = $this->getImageDimensions();
@@ -169,7 +169,7 @@ class DOCMGR_UTIL_FILETHUMB
 			system(APP_CONVERT." -resize ".$dim." \"".$file."\" \"".$this->thumb."\"");
 					
 			//todo: replace this with php function	
-			if (is_dir($dir)) `rm -r $dir`;
+			if (is_dir($dir)) shell_exec("rm -r $dir");
 	
 		}
 	

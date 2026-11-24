@@ -220,7 +220,7 @@ function packFile($file)
     $cmd = "csspack \"".$file."\"";
   }
 
-  $ret = `$cmd`;
+  $ret = shell_exec("$cmd");
 
   return $ret;
 

@@ -8,7 +8,7 @@ class SharedCalendarTest extends \PHPUnit_Framework_TestCase {
 
     protected $backend;
 
-    function getInstance(array $props = null) {
+    function getInstance(?array $props = null) {
 
         if (is_null($props)) {
             $props = array(

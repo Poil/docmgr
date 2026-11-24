@@ -76,7 +76,7 @@ class DOCMGR_PDF extends DOCMGR
 		for ($i=0;$i<count($obj);$i++) $cmd .= " \"".$filepath[$i]."\"";
 
 		//run the merge
-		`$cmd 1> /tmp/merge1 2>/tmp/merge2`;
+		shell_exec("$cmd 1> /tmp/merge1 2>/tmp/merge2");
 
 		//get the name of the object we merged to
 		$sql = "SELECT name FROM docmgr.dm_object WHERE id='".$obj[0]."'";
@@ -154,9 +154,9 @@ class DOCMGR_PDF extends DOCMGR
 
     //shrink the png files to something manageable for viewing
     $cmd = APP_MOGRIFY." -format png -geometry 75x100 ".$pngtmp."/*";
-    `$cmd`;
+    shell_exec("$cmd");
     $cmd = APP_MOGRIFY." -format png -geometry 480x640 ".$hugepngtmp."/*";
-    `$cmd`;
+    shell_exec("$cmd");
       
     $filearr = scandir($pngtmp);
      
@@ -200,18 +200,18 @@ class DOCMGR_PDF extends DOCMGR
 
       //rotate the real file
       $cmd = APP_MOGRIFY." -rotate $deg $file";
-      `$cmd`;
+      shell_exec("$cmd");
       
       //rotate the thumbnail
 
       $thumbpath = $pngtmp."/".str_replace(".ppm",".png",$fn);
       $cmd = APP_MOGRIFY." -rotate $deg $thumbpath";
-      `$cmd`;
+      shell_exec("$cmd");
 
       //rotate the large thumbnail
       $thumbpath = $hugepngtmp."/".str_replace(".ppm",".png",$fn);
       $cmd = APP_MOGRIFY." -rotate $deg $thumbpath";
-      `$cmd`;
+      shell_exec("$cmd");
       
     }
 
@@ -363,7 +363,7 @@ class DOCMGR_PDF extends DOCMGR
 
     //convert all to individual pdf files
     $cmd = APP_MOGRIFY." -format pdf ".$tifftmp."/*.ppm";
-    `$cmd`;
+    shell_exec("$cmd");
       
     $filearr = scandir($tifftmp);
 
@@ -377,7 +377,7 @@ class DOCMGR_PDF extends DOCMGR
     }
 
     //remerge all files back over the original
-    `$cmd`;  
+    shell_exec("$cmd");  
 
 		//get the name of the object we merged to
 		$sql = "SELECT name FROM docmgr.dm_object WHERE id='".$this->objectId."'";
@@ -420,7 +420,7 @@ class DOCMGR_PDF extends DOCMGR
     
     //split our pdf into individual files
     $cmd = APP_GS." -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/".$this->apidata["optimize_level"]." -dNOPAUSE -dQUIET -dBATCH -sOutputFile=".$output." ".$filepath;
-    `$cmd`;
+    shell_exec("$cmd");
 
     if ($this->apidata["destination"]=="download")
     {

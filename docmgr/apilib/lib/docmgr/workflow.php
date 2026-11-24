@@ -1165,7 +1165,7 @@ class DOCMGR_WORKFLOW extends DOCMGR
     {
     	//something wacky was passed
       $this->throwError(_I18N_SHARE_INVALID_ERROR);
-      break;
+      return false;
     }
 
     $sql = "SELECT object_id FROM docmgr.dm_workflow_object WHERE workflow_id='".$this->workflowId."'";

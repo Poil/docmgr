@@ -75,7 +75,7 @@ class Component extends Node {
      * @param string $name
      * @param ElementList $iterator
      */
-    public function __construct($name, ElementList $iterator = null) {
+    public function __construct($name, ?ElementList $iterator = null) {
 
         $this->name = strtoupper($name);
         if (!is_null($iterator)) $this->iterator = $iterator;

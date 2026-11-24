@@ -730,7 +730,7 @@ function showModLevel($path,$sort)
 	modules and their descriptions.
 ************************************************************/
 
-function showModTableAlt($path,$sort = null,$altStyle,$decorStyle) {
+function showModTableAlt($path,$sort,$altStyle,$decorStyle) {
 
 	if (!$path) return false;
 

@@ -38,5 +38,5 @@ else
 }
 
 $cmd = APP_PYTHON." ../bin/DocumentConverter.py \"test.html\" \"test.pdf\"";
-$res = `$cmd`;
+$res = shell_exec("$cmd");
 echo $res."\n";

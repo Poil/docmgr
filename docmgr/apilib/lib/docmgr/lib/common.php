@@ -126,7 +126,7 @@ function clamAvScan($filepath) {
 	if (!defined("CLAMAV_SUPPORT")) return false;
 
 	$app = APP_CLAMAV;
-	$str = `$app --infected "$filepath"`;
+	$str = shell_exec("$app --infected \"$filepath\"");
 	
 	//return false if there is a scanning error
 	if (strstr($str,"Scanned files: 0")) return false;
@@ -221,7 +221,7 @@ function isPidRunning($pid) {
 
     if (!$pid) return false;
 
-    $str = `ps --no-headers --pid $pid`;
+    $str = shell_exec("ps --no-headers --pid $pid");
      
     if (strstr($str,$pid)) return true;
     else return false;
@@ -232,7 +232,7 @@ function isPidRunning($pid) {
 function checkIsRunning($app) {
 
   $cmd = "ps aux | grep \"".$app."\" | grep -c -v grep";
-  $num = `$cmd`;
+  $num = shell_exec("$cmd");
 
   if ($num > 0) return true;
   else return false;

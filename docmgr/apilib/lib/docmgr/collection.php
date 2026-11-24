@@ -224,7 +224,7 @@ class DOCMGR_COLLECTION extends DOCMGR_AOBJECT
 		$dir = $passDir."/".$obj["name"];
 	
 		//remove the directory if it is there
-		if (is_dir("$dir")) `rm -r "$dir"`;
+		if (is_dir("$dir")) shell_exec("rm -r \"$dir\"");
 		mkdir("$dir");
 	
 		for ($i=0;$i<$list["count"];$i++) 

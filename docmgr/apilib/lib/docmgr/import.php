@@ -218,7 +218,7 @@ class DOCMGR_IMPORT extends DOCMGR
 
     //resize it and move it
     $cmd = APP_CONVERT." -resize 480x640 \"".$thumb."\" \"".$hugethumb."\"";
-    `$cmd`;
+    shell_exec("$cmd");
  
     //return the thumbnail path
     $this->PROTO->add("preview",str_replace(SITE_PATH,SITE_URL,$hugethumb));
@@ -259,7 +259,7 @@ class DOCMGR_IMPORT extends DOCMGR
     $cmd = APP_GS." -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE=\"".$output."\" -dBATCH";
     for ($i=0;$i<count($files);$i++)  $cmd .= " \"".$files[$i]."\" ";
 
-    `$cmd`;
+    shell_exec("$cmd");
     
     //if the output file exists, delete the other files, otherwise throw an error
     if (!file_exists($output)) 

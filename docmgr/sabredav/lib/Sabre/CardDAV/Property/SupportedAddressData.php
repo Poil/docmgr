@@ -29,7 +29,7 @@ class SupportedAddressData extends DAV\Property {
      *
      * @param array|null $supportedData
      */
-    public function __construct(array $supportedData = null) {
+    public function __construct(?array $supportedData = null) {
 
         if (is_null($supportedData)) {
             $supportedData = array(

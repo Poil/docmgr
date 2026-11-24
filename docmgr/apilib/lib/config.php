@@ -10,6 +10,7 @@ class CONFIG
   protected $errorMsg;
   protected $errorCode;
   protected $DB;
+  protected $CDB;
   protected $PROTO;
   protected $LOGGER;
         
@@ -20,7 +21,7 @@ class CONFIG
     //db resources
     $this->conn = $GLOBALS["conn"];  
     $this->DB = $GLOBALS["DB"];
-    $this->CDB = $GLOBALS["CDB"];
+    $this->CDB = $GLOBALS["CDB"] ?? null;
     $this->PROTO = $GLOBALS["PROTO"];
     $this->LOGGER = $GLOBALS["logger"];
 

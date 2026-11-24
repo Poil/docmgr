@@ -150,13 +150,13 @@ class APIREQUEST
   {
 
 		//try to set the session if passed
-		if ($this->header["session_id"]) @session_id($this->header["session_id"]);
+		if (!empty($this->header["session_id"])) @session_id($this->header["session_id"]);
 
 		//start the session
 		session_start();
 		
 		//called if a username or password is set, or if the client is looking for a valid cookie 
-		if (		isset($_SESSION["api"]["authorize"]) || $this->body["command"]=="login" ||
+		if (		isset($_SESSION["api"]["authorize"]) || ($this->body["command"] ?? null)=="login" ||
 		      (	isset($this->header["login"]) && isset($this->header["password"])	) ||
 		      ( isset($_REQUEST["login"]) && isset($_REQUEST["password"])	 				)
           )

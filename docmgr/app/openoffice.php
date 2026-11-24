@@ -86,7 +86,7 @@ class OPENOFFICE
 
     //clear it out
     $cmd = "rm ".$this->tmpdir."/*";
-    `$cmd`;
+    shell_exec("$cmd");
     
   }
 
@@ -154,7 +154,7 @@ class OPENOFFICE
 
       //convert the file to the new extension  
       $cmd = "php bin/fileconvert.php \"".$convfile."\" \"".$dest."\"";
-      `$cmd`;
+      shell_exec("$cmd");
 
       //conversion wasn't completed
       if (!file_exists($dest))

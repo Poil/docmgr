@@ -15,7 +15,7 @@ function checkAppAvail($app)
   //extract the app from it's command line args
   $app = extractApp($app);
 
-	$str = `which "$app" 2>/dev/null`;
+	$str = shell_exec("which \"$app\" 2>/dev/null");
 
 	//if which returns nothing, it couldn't find the app
 	if (!$str) return false;
@@ -39,7 +39,7 @@ function checkRequiredApp($app) {
         //extract the app from it's command line args
         $app = extractApp($app);
 
-	$str = `which "$app" 2>/dev/null`;
+	$str = shell_exec("which \"$app\" 2>/dev/null");
 	$error = null;
 
 	//if which returns nothing, it couldn't find the app
@@ -112,7 +112,7 @@ function setExternalApps() {
 
      //make sure they are not using the cgi version of php
      $app = APP_PHP." -v";
-     $str = `$app`;
+     $str = shell_exec("$app");
      if (!strstr($str,"(cli)")) die("You are not using the cli version of php.  Please either install php-cli");
 
      $_SESSION["api"]["setApps"] = getExternalApps();	

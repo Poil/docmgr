@@ -156,7 +156,7 @@ class POP3 {
    * @param int $debug_level
    * @return bool
    */
-  public function Authorise ($host, $port = false, $tval = false, $username, $password, $debug_level = 0) {
+  public function Authorise ($host, $port, $tval, $username, $password, $debug_level = 0) {
     $this->host = $host;
 
     //  If no port value is passed, retrieve it

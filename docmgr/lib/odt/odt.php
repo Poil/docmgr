@@ -250,9 +250,9 @@ class ODT
 
     }
 
-    if ($header && count($header) > 0) 	$this->addRows(&$table,"TableHeader",$header,$headerAlignArr);
-    if ($arr && count($arr) > 0) 				$this->addRows(&$table,"TableCell",$arr,$alignArr);
-    if ($footer && count($footer) > 0) 	$this->addRows(&$table,"TableFooter",$footer);
+    if ($header && count($header) > 0) 	$this->addRows($table,"TableHeader",$header,$headerAlignArr);
+    if ($arr && count($arr) > 0) 				$this->addRows($table,"TableCell",$arr,$alignArr);
+    if ($footer && count($footer) > 0) 	$this->addRows($table,"TableFooter",$footer);
      
     $this->body->appendChild($table); 
   
@@ -487,7 +487,7 @@ class ODT
 
     //copy the template over  
     $cmd = "cp -R ".$this->templateDir."/* ".$this->tmpDir."/";
-    `$cmd`;
+    shell_exec("$cmd");
 
     //copy all images
     for ($i=0;$i<count($this->images);$i++)
@@ -506,9 +506,9 @@ class ODT
     }
 
     //write our update xml to their respective files 
-    $this->saveXMLFile(&$this->content,"content.xml");
-    $this->saveXMLFile(&$this->styles,"styles.xml");
-    $this->saveXMLFile(&$this->manifest,"META-INF/manifest.xml");
+    $this->saveXMLFile($this->content,"content.xml");
+    $this->saveXMLFile($this->styles,"styles.xml");
+    $this->saveXMLFile($this->manifest,"META-INF/manifest.xml");
     
     //where we write the report
     $outputfile = TMP_DIR."/".USER_LOGIN."/output.odt";
@@ -518,7 +518,7 @@ class ODT
 
     //zip it all up            
     $cmd = "cd ".$this->tmpDir."; zip -r ".$outputfile." *";
-    `$cmd`;
+    shell_exec("$cmd");
 
     //reformat if necessary
     if ($this->outputFormat=="pdf")

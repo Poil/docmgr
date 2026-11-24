@@ -1005,8 +1005,8 @@ class DOCMGR_FILE extends DOCMGR_AOBJECT
 		else $deg = "270";
 
 		//rotate the real file
-		`mogrify -rotate $deg $file`;
-		`mogrify -rotate $deg $thumbfile`;
+		shell_exec("mogrify -rotate $deg $file");
+		shell_exec("mogrify -rotate $deg $thumbfile");
 
 	}
 
