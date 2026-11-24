@@ -40,6 +40,7 @@ Tested with **PHP 8.5** (PHP-FPM) and **PostgreSQL 18** on Ubuntu 26.04.
 - Removed unused demo/test code: `sabredav/{examples,docs,tests,fileserver.php}`, `jslib/datepicker/Test`.
 - `count()` on `null` is a fatal `TypeError` since PHP 8 (for example, "add filter" in search returned HTTP 500). Every `count()` on a variable in docmgr's code now uses `count((array) $x)`, which keeps the PHP 7 result (`null` → 0). The two `SimpleXMLElement` counts in `lib/xml.php` and `lib/libxml.php` are unchanged.
 - Bumped `JS_VERSION` in `config/version.php` so browsers reload the upgraded JavaScript instead of the cached 2013 copies.
+- `bin/docmgr-indexer.php`: `debugMsg()` read the undefined `DEBUG` constant, a fatal error since PHP 8, so the indexer died on its first message. Full-text indexing and thumbnails had silently stopped, and uploads just piled up in `docmgr.dm_index_queue`.
 
 ## Installation notes
 
@@ -51,6 +52,16 @@ Tested with **PHP 8.5** (PHP-FPM) and **PostgreSQL 18** on Ubuntu 26.04.
   ```
 - Apache: send `*.php` to PHP-FPM (`SetHandler "proxy:unix:/run/php/phpX.Y-fpm.sock|fcgi://localhost"`). Update the socket path after each PHP upgrade.
 - PHP extensions: `pgsql`, `mbstring`, `gd`, `xml`, `zip`, `imagick`.
+- External tools: `poppler-utils` (`pdftotext`, `pdfimages`) for PDF text indexing; ImageMagick (`convert`, `mogrify`, `montage`) and Ghostscript for thumbnails; `zip`; optionally `ocrad`/`tesseract` (OCR) and LibreOffice (office documents). docmgr detects them at login and silently skips what is missing.
+- Ubuntu 26.04 confines Ghostscript with an AppArmor profile, so ImageMagick cannot read the document store and thumbnails fail with `Permission denied`. Allow it in `/etc/apparmor.d/local/gs`, then run `apparmor_parser -r /etc/apparmor.d/gs`:
+  ```
+  /path/to/files/** r,
+  ```
+- After an upload the indexer runs in the background. To process the queue or a single object by hand, run from the web root as the web server user:
+  ```sh
+  php bin/docmgr-indexer.php                     # process docmgr.dm_index_queue
+  php bin/docmgr-indexer.php --index-object 123  # one object: text index + thumbnails
+  ```
 - After changing any JavaScript or CSS (including a CKEditor upgrade), bump `JS_VERSION` in `docmgr/config/version.php`. It is the `?v=` cache-busting parameter on every script and stylesheet, so without a bump browsers keep serving stale files.
 
 To check compatibility after a PHP upgrade, lint every file. PHP reports compile-time deprecations only once per file, so the error log alone misses most of them:

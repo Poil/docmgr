@@ -153,7 +153,7 @@ function debugMsg($level,$msg)
   if (php_sapi_name()=="cli") $sep = "\n";
   else $sep = "<br>";
     
-  if (DEBUG >= $level) echo $msg.$sep;
+  if (defined("DEBUG") && DEBUG >= $level) echo $msg.$sep;
            
 }
             
